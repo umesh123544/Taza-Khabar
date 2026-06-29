@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | नेपाल समाचार</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Serif+Devanagari:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    .auth-page { min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 40px 16px; }
+    .auth-card { background: white; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); padding: 40px; width: 100%; max-width: 420px; }
+    .auth-logo { text-align: center; margin-bottom: 24px; }
+    .auth-logo .logo-ne { font-family: 'Noto Serif Devanagari', serif; font-size: 28px; font-weight: 700; color: #c0392b; }
+    .auth-title { font-size: 20px; font-weight: 700; color: #1a2744; text-align: center; margin-bottom: 24px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 14px; color: #495057; margin-bottom: 6px; font-weight: 500; }
+    .form-group input { width: 100%; padding: 10px 14px; border: 1px solid #dee2e6; border-radius: 6px; font-family: var(--font-ne); font-size: 15px; transition: border-color 0.2s; }
+    .form-group input:focus { outline: none; border-color: #c0392b; }
+    .btn-auth { width: 100%; background: #c0392b; color: white; border: none; padding: 12px; border-radius: 6px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: var(--font-ne); margin-top: 8px; transition: background 0.2s; }
+    .btn-auth:hover { background: #922b21; }
+    .auth-divider { text-align: center; color: #6c757d; font-size: 13px; margin: 16px 0; font-family: var(--font-en); }
+    .auth-switch { text-align: center; font-size: 14px; color: #555; margin-top: 16px; }
+    .auth-switch a { color: #c0392b; font-weight: 600; }
+    .forgot { text-align: right; font-size: 12px; margin-top: 4px; }
+    .forgot a { color: #c0392b; font-family: var(--font-en); }
+    .error-msg { background: #fdf2f2; border: 1px solid #f5c6c6; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: #c0392b; margin-bottom: 16px; display: none; }
+    .success-msg { background: #f0faf0; border: 1px solid #b8dfb8; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: #2e7d32; margin-bottom: 16px; display: none; }
+  </style>
+</head>
+<body>
+  <div class="topbar"><div class="container topbar-inner"><a href="index.html" style="color:#cdd5e0">← गृहपृष्ठमा फर्कनुहोस् | Back to Home</a></div></div>
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo"><span class="logo-ne">नेपाल समाचार</span></div>
+      <h2 class="auth-title">लगइन गर्नुहोस् | Login</h2>
+      <div class="error-msg" id="error-msg">❌ इमेल वा पासवर्ड गलत छ।</div>
+      <div class="success-msg" id="success-msg">✅ सफलतापूर्वक लगइन भयो! Redirecting...</div>
+      <div class="form-group">
+        <label>इमेल ठेगाना | Email</label>
+        <input type="email" id="login-email" placeholder="your@email.com" />
+      </div>
+      <div class="form-group">
+        <label>पासवर्ड | Password</label>
+        <input type="password" id="login-password" placeholder="••••••••" />
+        <div class="forgot"><a href="#">पासवर्ड बिर्सनुभयो? | Forgot password?</a></div>
+      </div>
+      <button class="btn-auth" onclick="doLogin()">लगइन | Login</button>
+      <div class="auth-divider">— वा —</div>
+      <div class="auth-switch">नयाँ खाता खोल्नुहोस्? <a href="register.html">दर्ता गर्नुहोस् | Register</a></div>
+      <div class="auth-switch" style="margin-top:8px"><a href="subscribe.html">Premium सदस्यता लिनुहोस् →</a></div>
+    </div>
+  </div>
+  <script>
+    function doLogin() {
+      const email = document.getElementById('login-email').value;
+      const pass = document.getElementById('login-password').value;
+      const err = document.getElementById('error-msg');
+      const suc = document.getElementById('success-msg');
+      err.style.display = 'none';
+      suc.style.display = 'none';
+      if (!email || !pass) { err.textContent = '❌ कृपया सबै फिल्ड भर्नुहोस्।'; err.style.display = 'block'; return; }
+      // Demo: save to localStorage and redirect
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const user = users.find(u => u.email === email && u.password === pass);
+      if (user) {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        suc.style.display = 'block';
+        setTimeout(() => window.location.href = 'index.html', 1500);
+      } else {
+        err.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
