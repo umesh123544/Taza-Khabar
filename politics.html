@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>राजनीति | Politics — Nepal Samachar</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pol: #8e1a1a; --pol-dark: #6d1313; --pol-light: #fdf2f2;
+      --bg: #f5f5f5; --white: #fff; --text: #1a1a1a; --muted: #666; --border: #e0e0e0;
+      --red: #c0392b;
+    }
+    body { font-family: 'Inter', 'Noto Sans Devanagari', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; }
+    a { text-decoration: none; color: inherit; }
+    img { width: 100%; display: block; object-fit: cover; }
+    .topbar { background: var(--text); color: #ccc; font-size: 12px; padding: 6px 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .topbar-inner { display: flex; justify-content: space-between; align-items: center; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .topbar-right a { color: #ccc; }
+    .btn-login { background: var(--red); color: #fff !important; padding: 3px 12px; border-radius: 3px; font-size: 11px; }
+    .header { background: var(--white); border-bottom: 3px solid var(--pol); box-shadow: 0 2px 6px rgba(0,0,0,.07); position: sticky; top: 0; z-index: 100; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
+    .logo a { display: flex; align-items: center; }
+    .logo-img { height: 50px; width: auto; object-fit: contain; display: block; }
+    .main-nav { display: flex; align-items: center; gap: 4px; }
+    .main-nav a { padding: 7px 12px; border-radius: 4px; font-size: 14px; font-weight: 500; color: var(--text); transition: background .2s, color .2s; }
+    .main-nav a:hover, .main-nav a.active { background: var(--red); color: #fff; }
+    .nav-subscribe { background: var(--red) !important; color: #fff !important; }
+    .hamburger { display: none; background: none; border: none; font-size: 22px; cursor: pointer; }
+    .breaking { background: #222; color: #fff; padding: 7px 0; overflow: hidden; }
+    .breaking-inner { display: flex; align-items: center; gap: 12px; }
+    .breaking-label { background: var(--red); color: #fff; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 2px; white-space: nowrap; text-transform: uppercase; letter-spacing: 1px; }
+    .ticker-wrap { overflow: hidden; flex: 1; }
+    .ticker { white-space: nowrap; animation: ticker 30s linear infinite; font-size: 13px; }
+    @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+    .page-hero { background: linear-gradient(135deg, var(--pol-dark) 0%, var(--pol) 100%); color: #fff; padding: 32px 0 24px; }
+    .page-hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 6px; }
+    .page-hero p { opacity: .85; font-size: 14px; }
+    .breadcrumb { font-size: 12px; opacity: .7; margin-bottom: 10px; }
+    .breadcrumb a { color: #fff; opacity: .8; }
+
+    .filter-bar { background: var(--white); border-bottom: 1px solid var(--border); }
+    .filter-bar-inner { display: flex; overflow-x: auto; }
+    .filter-btn { padding: 14px 20px; font-size: 13px; font-weight: 500; border: none; background: none; cursor: pointer; border-bottom: 3px solid transparent; color: var(--muted); white-space: nowrap; transition: all .2s; }
+    .filter-btn:hover { color: var(--pol); }
+    .filter-btn.active { color: var(--pol); border-bottom-color: var(--pol); font-weight: 600; }
+
+    .main-layout { display: grid; grid-template-columns: 1fr 320px; gap: 28px; padding: 28px 20px; }
+    .content-main { min-width: 0; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--pol); }
+    .section-header h2 { font-size: 1.1rem; font-weight: 700; }
+    .section-header a { font-size: 13px; color: var(--pol); font-weight: 500; }
+
+    /* FEATURED */
+    .featured-article { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.07); margin-bottom: 28px; }
+    .featured-img-wrap { position: relative; }
+    .featured-img { height: 320px; object-fit: cover; }
+    .category-badge { position: absolute; top: 16px; left: 16px; background: var(--pol); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 3px; text-transform: uppercase; }
+    .featured-body { padding: 24px; }
+    .featured-title { font-size: 1.4rem; font-weight: 700; line-height: 1.4; margin-bottom: 6px; font-family: 'Noto Sans Devanagari', sans-serif; }
+    .featured-title-en { font-size: 1rem; color: var(--muted); margin-bottom: 12px; }
+    .featured-excerpt { color: #444; line-height: 1.7; margin-bottom: 16px; }
+    .article-meta { display: flex; gap: 16px; font-size: 12px; color: var(--muted); margin-bottom: 16px; flex-wrap: wrap; }
+    .btn-read-more { display: inline-block; background: var(--pol); color: #fff; padding: 9px 22px; border-radius: 5px; font-size: 13px; font-weight: 600; transition: background .2s; }
+    .btn-read-more:hover { background: var(--pol-dark); }
+
+    /* NEWS GRID */
+    .news-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 28px; }
+    .news-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 5px rgba(0,0,0,.05); transition: box-shadow .2s, transform .2s; position: relative; }
+    .news-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.1); transform: translateY(-2px); }
+    .news-card img { height: 170px; object-fit: cover; }
+    .news-card-body { padding: 14px; }
+    .news-card-body h3 { font-size: .9rem; font-weight: 600; line-height: 1.5; margin: 8px 0 6px; font-family: 'Noto Sans Devanagari', sans-serif; }
+    .news-card-body p { font-size: .82rem; color: #555; line-height: 1.6; margin-bottom: 10px; }
+    .article-meta.small { font-size: 11px; color: var(--muted); gap: 10px; margin-bottom: 8px; }
+    .tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 2px; text-transform: uppercase; letter-spacing: .4px; color: #fff; }
+    .tag-politics { background: var(--pol); }
+    .tag-economy { background: #2c3e50; }
+    .tag-news { background: #2980b9; }
+    .read-link { font-size: 12px; color: var(--pol); font-weight: 600; }
+    .premium { border: 1.5px solid #f0c060; }
+    .premium-badge { position: absolute; top: 8px; right: 8px; background: #f0c060; color: #7a5a00; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 2px; }
+    .premium-lock { color: #b8860b; }
+
+    /* PARLIAMENT TRACKER */
+    .parliament-tracker { background: var(--white); border-radius: 8px; padding: 20px; margin-bottom: 28px; box-shadow: 0 1px 5px rgba(0,0,0,.05); }
+    .parliament-tracker h3 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--pol); }
+    .party-bars { display: flex; flex-direction: column; gap: 10px; }
+    .party-bar { display: flex; align-items: center; gap: 10px; }
+    .party-name { font-size: 12px; font-weight: 600; width: 120px; flex-shrink: 0; color: var(--text); }
+    .bar-track { flex: 1; background: #eee; border-radius: 4px; height: 14px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width .8s; }
+    .bar-count { font-size: 12px; font-weight: 600; color: var(--muted); width: 40px; text-align: right; }
+    .p1 { background: #c0392b; } .p2 { background: #2980b9; } .p3 { background: #27ae60; } .p4 { background: #f39c12; } .p5 { background: #9b59b6; }
+
+    /* SIDEBAR */
+    .sidebar { min-width: 0; }
+    .sidebar-widget { background: var(--white); border-radius: 8px; padding: 18px; margin-bottom: 20px; box-shadow: 0 1px 5px rgba(0,0,0,.05); }
+    .sidebar-widget h3 { font-size: .95rem; font-weight: 700; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--pol); }
+    .search-box { display: flex; gap: 6px; }
+    .search-box input { flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; outline: none; }
+    .search-box button { background: var(--pol); color: #fff; border: none; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600; }
+    .trending-list { padding-left: 18px; }
+    .trending-list li { margin-bottom: 10px; }
+    .trending-list a { font-size: 13px; line-height: 1.5; color: var(--text); font-family: 'Noto Sans Devanagari', sans-serif; }
+    .trending-list a:hover { color: var(--pol); }
+    .newsletter-form { display: flex; flex-direction: column; gap: 8px; }
+    .newsletter-form input { padding: 9px 12px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; outline: none; }
+    .newsletter-form button { background: var(--pol); color: #fff; border: none; padding: 9px; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 13px; }
+    .social-links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .social-btn { display: block; text-align: center; padding: 8px; border-radius: 4px; font-size: 12px; font-weight: 600; color: #fff; }
+    .fb { background: #1877f2; } .yt { background: #f00; } .tw { background: #000; } .wa { background: #25d366; }
+
+    /* PAGINATION */
+    .pagination { display: flex; gap: 6px; justify-content: center; margin: 28px 0; }
+    .page-btn { padding: 8px 14px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; cursor: pointer; background: var(--white); color: var(--text); transition: all .2s; }
+    .page-btn:hover, .page-btn.active { background: var(--pol); color: #fff; border-color: var(--pol); }
+
+    /* FOOTER */
+    .footer { background: #1a1a1a; color: #aaa; padding: 40px 0 0; margin-top: 40px; }
+    .footer-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; padding-bottom: 28px; }
+    .footer-col h4 { color: #fff; font-size: .9rem; margin-bottom: 14px; }
+    .footer-col p { font-size: 13px; line-height: 1.8; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 6px; }
+    .footer-col ul li a { font-size: 13px; color: #aaa; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid #333; text-align: center; padding: 16px; font-size: 12px; }
+
+    @media (max-width: 900px) { .main-layout { grid-template-columns: 1fr; } .footer-inner { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 600px) { 
+      .news-grid { grid-template-columns: 1fr; } 
+      .main-nav { display: none; } 
+      .hamburger { display: block; } 
+      .logo-img { height: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span id="datetime"></span>
+      <div class="topbar-right">
+        <a href="#">नेपाली</a><span>|</span><a href="#">English</a>
+        <a href="login.html" class="btn-login">Login / लगइन</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html">
+          <img src="https://i.ibb.co/fGz4qtwn/dhamadhamkhabar.png" alt="धमाधम खबर" class="logo-img" />
+        </a>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html">गृहपृष्ठ</a>
+        <a href="news.html">समाचार</a>
+        <a href="blog.html">ब्लग</a>
+        <a href="politics.html" class="active">राजनीति</a>
+        <a href="technology.html">प्रविधि</a>
+        <a href="sports.html">खेलकुद</a>
+        <a href="subscribe.html" class="nav-subscribe">सदस्यता</a>
+      </nav>
+      <button class="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <div class="breaking">
+    <div class="container breaking-inner">
+      <span class="breaking-label">Breaking</span>
+      <div class="ticker-wrap"><div class="ticker">&nbsp;&nbsp;&nbsp; 🔴 नेपाल सरकारले नयाँ बजेट घोषणा गर्यो &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 🔴 संसद अधिवेशन सुरु &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 🔴 प्रधानमन्त्रीले नयाँ नीति घोषणा गर्ने &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 🔴 विपक्षी दलको प्रदर्शन काठमाडौंमा</div></div>
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">गृहपृष्ठ</a> › राजनीति</div>
+      <h1>🏛️ राजनीति | Politics</h1>
+      <p>नेपालको राजनीतिक घटनाक्रम — Nepal's political developments & analysis</p>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="container filter-bar-inner">
+      <button class="filter-btn active">सबै | All</button>
+      <button class="filter-btn">सरकार | Government</button>
+      <button class="filter-btn">संसद | Parliament</button>
+      <button class="filter-btn">दल | Parties</button>
+      <button class="filter-btn">निर्वाचन | Election</button>
+      <button class="filter-btn">विश्लेषण | Analysis</button>
+      <button class="filter-btn">अन्तर्राष्ट्रिय | International</button>
+    </div>
+  </div>
+
+  <main class="container main-layout">
+    <section class="content-main">
+
+      <article class="featured-article">
+        <div class="featured-img-wrap">
+          <img src="https://images.unsplash.com/photo-1568219656418-15c329312bf1?w=800&q=80" alt="Politics" class="featured-img" />
+          <span class="category-badge">राजनीति | Politics</span>
+        </div>
+        <div class="featured-body">
+          <h1 class="featured-title">नेपाल सरकारले आगामी आर्थिक वर्षको बजेट घोषणा गर्यो — नयाँ विकास योजनाहरू सार्वजनिक</h1>
+          <p class="featured-title-en">Nepal Government Announces Budget for Upcoming Fiscal Year — New Development Plans Revealed</p>
+          <p class="featured-excerpt">सरकारले यस वर्षको बजेटमा शिक्षा, स्वास्थ्य र पूर्वाधार विकासमा विशेष ध्यान दिएको छ। वित्त मन्त्रालयका अनुसार यस पटकको बजेट ऐतिहासिक रूपमा ठूलो छ र यसले लाखौं नागरिकको जीवनस्तरमा सुधार ल्याउनेछ।</p>
+          <div class="article-meta">
+            <span>✎ रमेश श्रेष्ठ</span><span>📅 २०८१ असार १५</span><span>⏱ ५ मिनेट</span>
+          </div>
+          <a href="article.html" class="btn-read-more">पूरा पढ्नुहोस् | Read More →</a>
+        </div>
+      </article>
+
+      <!-- PARLIAMENT STRENGTH TRACKER -->
+      <div class="parliament-tracker">
+        <h3>🏛️ संसद बल | Parliament Seat Strength (275 seats)</h3>
+        <div class="party-bars">
+          <div class="party-bar"><span class="party-name">नेकपा (एमाले)</span><div class="bar-track"><div class="bar-fill p1" style="width:36%"></div></div><span class="bar-count">९९</span></div>
+          <div class="party-bar"><span class="party-name">नेकपा (माओवादी)</span><div class="bar-track"><div class="bar-fill p2" style="width:25%"></div></div><span class="bar-count">६८</span></div>
+          <div class="party-bar"><span class="party-name">नेपाली काँग्रेस</span><div class="bar-track"><div class="bar-fill p3" style="width:22%"></div></div><span class="bar-count">५७</span></div>
+          <div class="party-bar"><span class="party-name">राप्रपा</span><div class="bar-track"><div class="bar-fill p4" style="width:9%"></div></div><span class="bar-count">२४</span></div>
+          <div class="party-bar"><span class="party-name">अन्य | Others</span><div class="bar-track"><div class="bar-fill p5" style="width:10%"></div></div><span class="bar-count">२७</span></div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <h2>राजनीतिक समाचार | Political News</h2>
+        <span style="font-size:13px;color:var(--muted);">८६ समाचार</span>
+      </div>
+
+      <div class="news-grid">
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80" alt="Politics" />
+          <div class="news-card-body">
+            <span class="tag tag-politics">सरकार</span>
+            <h3>प्रधानमन्त्रीले नयाँ मन्त्रिपरिषद् गठन गर्ने संकेत दिए</h3>
+            <p>प्रधानमन्त्रीले आगामी साता नयाँ मन्त्रिपरिषद् गठन हुने संकेत दिएका छन्।</p>
+            <div class="article-meta small"><span>📅 असार १४</span><span>⏱ ४ मिनेट</span></div>
+            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+          </div>
+        </article>
+        <article class="news-card premium">
+          <div class="premium-badge">🔒 Premium</div>
+          <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=400&q=80" alt="Parliament" />
+          <div class="news-card-body">
+            <span class="tag tag-politics">संसद</span>
+            <h3>संसदमा बजेटमाथि छलफल: विपक्षले आपत्ति जनायो</h3>
+            <p>प्रतिनिधिसभामा बजेटमाथि छलफलका क्रममा विपक्षी दलहरूले कडा आपत्ति जनाएका छन्।</p>
+            <div class="article-meta small"><span>📅 असार १३</span><span>⏱ ५ मिनेट</span></div>
+            <a href="subscribe.html" class="read-link premium-lock">🔒 सदस्यता चाहिन्छ →</a>
+          </div>
+        </article>
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=400&q=80" alt="Party" />
+          <div class="news-card-body">
+            <span class="tag tag-politics">दल</span>
+            <h3>नेपाली काँग्रेसले महाधिवेशनको तारिख तोक्यो</h3>
+            <p>नेपाली काँग्रेसले आगामी महाधिवेशन मंसिर महिनामा हुने घोषणा गरेको छ।</p>
+            <div class="article-meta small"><span>📅 असार १२</span><span>⏱ ३ मिनेट</span></div>
+            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+          </div>
+        </article>
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&q=80" alt="International" />
+          <div class="news-card-body">
+            <span class="tag tag-news">अन्तर्राष्ट्रिय</span>
+            <h3>नेपाल-भारत सम्बन्ध: नयाँ व्यापार सम्झौतामा छलफल</h3>
+            <p>नेपाल र भारतबीच नयाँ व्यापार सम्झौताका लागि उच्चस्तरीय छलफल भइरहेको छ।</p>
+            <div class="article-meta small"><span>📅 असार ११</span><span>⏱ ४ मिनेट</span></div>
+            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="pagination">
+        <button class="page-btn active">१</button>
+        <button class="page-btn">२</button>
+        <button class="page-btn">३</button>
+        <button class="page-btn">→</button>
+      </div>
+
+    </section>
+
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h3>🔍 खोज्नुहोस्</h3>
+        <div class="search-box"><input type="text" placeholder="राजनीतिक समाचार..."/><button>खोज</button></div>
+      </div>
+      <div class="sidebar-widget">
+        <h3>📈 ट्रेन्डिङ</h3>
+        <ol class="trending-list">
+          <li><a href="article.html">प्रधानमन्त्रीको नयाँ नीति घोषणा</a></li>
+          <li><a href="article.html">संसद अधिवेशनमा तातो बहस</a></li>
+          <li><a href="article.html">स्थानीय चुनावको तयारी सुरु</a></li>
+          <li><a href="article.html">दलहरूबीच गठबन्धनमा चर्चा</a></li>
+          <li><a href="article.html">मन्त्रिपरिषद् फेरबदलको सम्भावना</a></li>
+        </ol>
+      </div>
+      <div class="sidebar-widget">
+        <h3>📧 Newsletter</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">राजनीतिक अपडेट पाउनुहोस्।</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="your@email.com" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+      <div class="sidebar-widget">
+        <h3>🌐 Follow गर्नुहोस्</h3>
+        <div class="social-links">
+          <a href="#" class="social-btn fb">Facebook</a>
+          <a href="#" class="social-btn yt">YouTube</a>
+          <a href="#" class="social-btn tw">Twitter/X</a>
+          <a href="#" class="social-btn wa">WhatsApp</a>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-col"><h4>नेपाल समाचार</h4><p>नेपालको विश्वसनीय समाचार स्रोत।</p></div>
+      <div class="footer-col"><h4>विभाग | Sections</h4><ul><li><a href="news.html">समाचार</a></li><li><a href="blog.html">ब्लग</a></li><li><a href="politics.html">राजनीति</a></li><li><a href="technology.html">प्रविधि</a></li><li><a href="sports.html">खेलकुद</a></li></ul></div>
+      <div class="footer-col"><h4>जानकारी</h4><ul><li><a href="about.html">हाम्रो बारे</a></li><li><a href="contact.html">सम्पर्क</a></li><li><a href="privacy.html">गोपनीयता नीति</a></li></ul></div>
+      <div class="footer-col"><h4>सम्पर्क</h4><p>📍 काठमाडौं, नेपाल</p><p>📧 info@nepalsamachar.com</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2081 नेपाल समाचार | Nepal Samachar. सर्वाधिकार सुरक्षित।</p></div>
+  </footer>
+
+  <script>
+    function updateTime() {
+      const el = document.getElementById('datetime');
+      if (el) el.textContent = new Date().toLocaleString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+    }
+    updateTime(); setInterval(updateTime, 60000);
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
