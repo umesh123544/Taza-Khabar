@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>समाचार | News — Nepal Samachar</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,9 +39,8 @@
     /* HEADER */
     .header { background: var(--white); border-bottom: 3px solid var(--red); box-shadow: 0 2px 6px rgba(0,0,0,.07); position: sticky; top: 0; z-index: 100; }
     .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
-    .logo a { display: flex; flex-direction: column; line-height: 1; }
-    .logo-ne { font-size: 22px; font-weight: 700; color: var(--red); font-family: 'Noto Sans Devanagari', sans-serif; }
-    .logo-en { font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+    .logo a { display: flex; align-items: center; }
+    .logo-img { height: 50px; width: auto; object-fit: contain; display: block; }
     .main-nav { display: flex; align-items: center; gap: 4px; }
     .main-nav a { padding: 7px 12px; border-radius: 4px; font-size: 14px; font-weight: 500; color: var(--text); transition: background .2s, color .2s; }
     .main-nav a:hover, .main-nav a.active { background: var(--red); color: #fff; }
@@ -178,6 +185,7 @@
       .hamburger { display: block; }
       .footer-inner { grid-template-columns: 1fr; }
       .featured-img { height: 200px; }
+      .logo-img { height: 40px; }
     }
   </style>
 </head>
@@ -199,8 +207,7 @@
     <div class="container header-inner">
       <div class="logo">
         <a href="index.html">
-          <span class="logo-ne">नेपाल समाचार</span>
-          <span class="logo-en">Nepal Samachar</span>
+          <img src="https://i.ibb.co/fGz4qtwn/dhamadhamkhabar.png" alt="धमाधम खबर" class="logo-img" />
         </a>
       </div>
       <nav class="main-nav">
