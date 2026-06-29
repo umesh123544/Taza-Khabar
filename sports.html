@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>खेलकुद | Sports — Nepal Samachar</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sports: #1a7a1a; --sports-dark: #145c14; --sports-light: #f0faf0;
+      --bg: #f5f5f5; --white: #fff; --text: #1a1a1a; --muted: #666; --border: #e0e0e0;
+      --red: #c0392b;
+    }
+    body { font-family: 'Inter', 'Noto Sans Devanagari', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; }
+    a { text-decoration: none; color: inherit; }
+    img { width: 100%; display: block; object-fit: cover; }
+    .topbar { background: var(--text); color: #ccc; font-size: 12px; padding: 6px 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .topbar-inner { display: flex; justify-content: space-between; align-items: center; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .topbar-right a { color: #ccc; }
+    .btn-login { background: var(--red); color: #fff !important; padding: 3px 12px; border-radius: 3px; font-size: 11px; }
+    .header { background: var(--white); border-bottom: 3px solid var(--sports); box-shadow: 0 2px 6px rgba(0,0,0,.07); position: sticky; top: 0; z-index: 100; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
+    .logo a { display: flex; align-items: center; }
+    .logo-img { height: 50px; width: auto; object-fit: contain; display: block; }
+    .main-nav { display: flex; align-items: center; gap: 4px; }
+    .main-nav a { padding: 7px 12px; border-radius: 4px; font-size: 14px; font-weight: 500; color: var(--text); transition: background .2s; }
+    .main-nav a:hover, .main-nav a.active { background: var(--red); color: #fff; }
+    .nav-subscribe { background: var(--red) !important; color: #fff !important; }
+    .hamburger { display: none; background: none; border: none; font-size: 22px; cursor: pointer; }
+    .breaking { background: #222; color: #fff; padding: 7px 0; overflow: hidden; }
+    .breaking-inner { display: flex; align-items: center; gap: 12px; }
+    .breaking-label { background: var(--red); color: #fff; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 2px; white-space: nowrap; text-transform: uppercase; }
+    .ticker-wrap { overflow: hidden; flex: 1; }
+    .ticker { white-space: nowrap; animation: ticker 30s linear infinite; font-size: 13px; }
+    @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+    .page-hero { background: linear-gradient(135deg, var(--sports-dark) 0%, #2ecc71 100%); color: #fff; padding: 32px 0 24px; }
+    .page-hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 6px; }
+    .page-hero p { opacity: .85; font-size: 14px; }
+    .breadcrumb { font-size: 12px; opacity: .7; margin-bottom: 10px; }
+    .breadcrumb a { color: #fff; opacity: .8; }
+
+    .filter-bar { background: var(--white); border-bottom: 1px solid var(--border); }
+    .filter-bar-inner { display: flex; overflow-x: auto; }
+    .filter-btn { padding: 14px 20px; font-size: 13px; font-weight: 500; border: none; background: none; cursor: pointer; border-bottom: 3px solid transparent; color: var(--muted); white-space: nowrap; transition: all .2s; }
+    .filter-btn:hover { color: var(--sports); }
+    .filter-btn.active { color: var(--sports); border-bottom-color: var(--sports); font-weight: 600; }
+
+    .main-layout { display: grid; grid-template-columns: 1fr 320px; gap: 28px; padding: 28px 20px; }
+    .content-main { min-width: 0; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--sports); }
+    .section-header h2 { font-size: 1.1rem; font-weight: 700; }
+    .section-header a { font-size: 13px; color: var(--sports); font-weight: 500; }
+
+    /* FEATURED */
+    .featured-article { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.07); margin-bottom: 28px; }
+    .featured-img-wrap { position: relative; }
+    .featured-img { height: 320px; object-fit: cover; }
+    .category-badge { position: absolute; top: 16px; left: 16px; background: var(--sports); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 3px; text-transform: uppercase; }
+    .featured-body { padding: 24px; }
+    .featured-title { font-size: 1.4rem; font-weight: 700; line-height: 1.4; margin-bottom: 6px; font-family: 'Noto Sans Devanagari', sans-serif; }
+    .featured-title-en { font-size: 1rem; color: var(--muted); margin-bottom: 12px; }
+    .featured-excerpt { color: #444; line-height: 1.7; margin-bottom: 16px; }
+    .article-meta { display: flex; gap: 16px; font-size: 12px; color: var(--muted); margin-bottom: 16px; flex-wrap: wrap; }
+    .btn-read-more { display: inline-block; background: var(--sports); color: #fff; padding: 9px 22px; border-radius: 5px; font-size: 13px; font-weight: 600; }
+    .btn-read-more:hover { background: var(--sports-dark); }
+
+    /* SCORE CARDS */
+    .score-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+    .score-card { background: var(--white); border-radius: 8px; padding: 14px; text-align: center; box-shadow: 0 1px 5px rgba(0,0,0,.06); border-top: 3px solid var(--sports); }
+    .score-sport { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--sports); letter-spacing: 1px; margin-bottom: 8px; }
+    .score-teams { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+    .score-team { font-size: 12px; font-weight: 600; color: var(--text); flex: 1; }
+    .score-team.right { text-align: right; }
+    .score-nums { font-size: 1.1rem; font-weight: 700; color: var(--sports); white-space: nowrap; }
+    .score-status { font-size: 10px; color: var(--muted); margin-top: 6px; }
+
+    /* NEWS GRID */
+    .news-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 28px; }
+    .news-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 5px rgba(0,0,0,.05); transition: box-shadow .2s, transform .2s; position: relative; }
+    .news-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.1); transform: translateY(-2px); }
+    .news-card img { height: 170px; object-fit: cover; }
+    .news-card-body { padding: 14px; }
+    .news-card-body h3 { font-size: .9rem; font-weight: 600; line-height: 1.5; margin: 8px 0 6px; font-family: 'Noto Sans Devanagari', sans-serif; }
+    .news-card-body p { font-size: .82rem; color: #555; line-height: 1.6; margin-bottom: 10px; }
+    .article-meta.small { font-size: 11px; color: var(--muted); gap: 10px; margin-bottom: 8px; }
+    .tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 2px; text-transform: uppercase; color: #fff; }
+    .tag-sports { background: var(--sports); }
+    .tag-cricket { background: #c0392b; }
+    .tag-football { background: #2980b9; }
+    .tag-athletics { background: #f39c12; }
+    .tag-martial { background: #8e44ad; }
+    .read-link { font-size: 12px; color: var(--sports); font-weight: 600; }
+    .premium { border: 1.5px solid #f0c060; }
+    .premium-badge { position: absolute; top: 8px; right: 8px; background: #f0c060; color: #7a5a00; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 2px; }
+    .premium-lock { color: #b8860b; }
+
+    /* SIDEBAR */
+    .sidebar { min-width: 0; }
+    .sidebar-widget { background: var(--white); border-radius: 8px; padding: 18px; margin-bottom: 20px; box-shadow: 0 1px 5px rgba(0,0,0,.05); }
+    .sidebar-widget h3 { font-size: .95rem; font-weight: 700; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--sports); }
+    .search-box { display: flex; gap: 6px; }
+    .search-box input { flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; outline: none; }
+    .search-box button { background: var(--sports); color: #fff; border: none; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600; }
+    .standings-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .standings-table th { text-align: left; padding: 6px 4px; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--border); }
+    .standings-table td { padding: 7px 4px; border-bottom: 1px solid #f0f0f0; }
+    .standings-table tr:hover td { background: var(--sports-light); }
+    .pos { font-weight: 700; color: var(--sports); }
+    .trending-list { padding-left: 18px; }
+    .trending-list li { margin-bottom: 10px; }
+    .trending-list a { font-size: 13px; line-height: 1.5; color: var(--text); }
+    .trending-list a:hover { color: var(--sports); }
+    .newsletter-form { display: flex; flex-direction: column; gap: 8px; }
+    .newsletter-form input { padding: 9px 12px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; outline: none; }
+    .newsletter-form button { background: var(--sports); color: #fff; border: none; padding: 9px; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 13px; }
+    .social-links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .social-btn { display: block; text-align: center; padding: 8px; border-radius: 4px; font-size: 12px; font-weight: 600; color: #fff; }
+    .fb { background: #1877f2; } .yt { background: #f00; } .tw { background: #000; } .wa { background: #25d366; }
+
+    .pagination { display: flex; gap: 6px; justify-content: center; margin: 28px 0; }
+    .page-btn { padding: 8px 14px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; cursor: pointer; background: var(--white); color: var(--text); transition: all .2s; }
+    .page-btn:hover, .page-btn.active { background: var(--sports); color: #fff; border-color: var(--sports); }
+
+    .footer { background: #1a1a1a; color: #aaa; padding: 40px 0 0; margin-top: 40px; }
+    .footer-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; padding-bottom: 28px; }
+    .footer-col h4 { color: #fff; font-size: .9rem; margin-bottom: 14px; }
+    .footer-col p { font-size: 13px; line-height: 1.8; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 6px; }
+    .footer-col ul li a { font-size: 13px; color: #aaa; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid #333; text-align: center; padding: 16px; font-size: 12px; }
+
+    @media (max-width: 900px) { .main-layout { grid-template-columns: 1fr; } .score-row { grid-template-columns: 1fr; } .footer-inner { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 600px) { 
+      .news-grid { grid-template-columns: 1fr; } 
+      .main-nav { display: none; } 
+      .hamburger { display: block; } 
+      .score-row { grid-template-columns: repeat(2,1fr); }
+      .logo-img { height: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span id="datetime"></span>
+      <div class="topbar-right">
+        <a href="#">नेपाली</a><span>|</span><a href="#">English</a>
+        <a href="login.html" class="btn-login">Login / लगइन</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html">
+          <img src="https://i.ibb.co/fGz4qtwn/dhamadhamkhabar.png" alt="धमाधम खबर" class="logo-img" />
+        </a>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html">गृहपृष्ठ</a>
+        <a href="news.html">समाचार</a>
+        <a href="blog.html">ब्लग</a>
+        <a href="politics.html">राजनीति</a>
+        <a href="technology.html">प्रविधि</a>
+        <a href="sports.html" class="active">खेलकुद</a>
+        <a href="subscribe.html" class="nav-subscribe">सदस्यता</a>
+      </nav>
+      <button class="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <div class="breaking">
+    <div class="container breaking-inner">
+      <span class="breaking-label">Breaking</span>
+      <div class="ticker-wrap"><div class="ticker">&nbsp;&nbsp;&nbsp; 🔴 नेपाली क्रिकेट टोली T20 विश्वकपमा छनोट &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 🔴 ANFA ले नयाँ राष्ट्रिय फुटबल लिग घोषणा गर्यो &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 🔴 नेपालले SAF खेलमा ३ स्वर्ण पदक जित्यो &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 🔴 कबड्डी विश्वकपमा नेपाल क्वार्टरफाइनलमा</div></div>
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">गृहपृष्ठ</a> › खेलकुद</div>
+      <h1>🏆 खेलकुद | Sports</h1>
+      <p>नेपाली खेलकुदका ताजा अपडेटहरू — Nepal's latest sports news & scores</p>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="container filter-bar-inner">
+      <button class="filter-btn active">सबै | All</button>
+      <button class="filter-btn">क्रिकेट | Cricket</button>
+      <button class="filter-btn">फुटबल | Football</button>
+      <button class="filter-btn">एथ्लेटिक्स</button>
+      <button class="filter-btn">मार्शल आर्ट</button>
+      <button class="filter-btn">भलिबल</button>
+      <button class="filter-btn">अन्तर्राष्ट्रिय</button>
+    </div>
+  </div>
+
+  <main class="container main-layout">
+    <section class="content-main">
+
+      <!-- LIVE SCORES -->
+      <div class="section-header">
+        <h2>🔴 Live / Recent Scores</h2>
+        <span style="font-size:13px;color:var(--sports);font-weight:600;">Live</span>
+      </div>
+      <div class="score-row">
+        <div class="score-card">
+          <div class="score-sport">🏏 Cricket · T20</div>
+          <div class="score-teams">
+            <span class="score-team">Nepal</span>
+            <span class="score-nums">🟢 164/6 vs 158/9</span>
+            <span class="score-team right">AFG</span>
+          </div>
+          <div class="score-status">Nepal won by 6 runs — Final</div>
+        </div>
+        <div class="score-card">
+          <div class="score-sport">⚽ Football · Friendly</div>
+          <div class="score-teams">
+            <span class="score-team">Nepal</span>
+            <span class="score-nums">1 — 2</span>
+            <span class="score-team right">India</span>
+          </div>
+          <div class="score-status">FT · 90+3'</div>
+        </div>
+        <div class="score-card">
+          <div class="score-sport">🤼 Kabaddi · World Cup</div>
+          <div class="score-teams">
+            <span class="score-team">Nepal</span>
+            <span class="score-nums">38 — 34</span>
+            <span class="score-team right">SRI</span>
+          </div>
+          <div class="score-status">Nepal won — Quarter Finals</div>
+        </div>
+      </div>
+
+      <!-- FEATURED -->
+      <article class="featured-article">
+        <div class="featured-img-wrap">
+          <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80" alt="Cricket" class="featured-img" />
+          <span class="category-badge">खेलकुद | Sports</span>
+        </div>
+        <div class="featured-body">
+          <h1 class="featured-title">नेपाली क्रिकेट टोली T20 विश्वकपमा छनोट — अफगानिस्तानलाई हरायो</h1>
+          <p class="featured-title-en">Nepal Cricket Team Qualifies for T20 World Cup — Defeats Afghanistan</p>
+          <p class="featured-excerpt">नेपाली क्रिकेट टोलीले छनोट खेलमा अफगानिस्तानलाई ६ रनले हराएर T20 विश्वकपमा ऐतिहासिक स्थान सुनिश्चित गरेको छ। यो नेपाली क्रिकेटको अहिलेसम्मकै ठूलो उपलब्धि हो।</p>
+          <div class="article-meta">
+            <span>✎ सन्तोष महर्जन</span><span>📅 असार १२</span><span>⏱ ४ मिनेट</span>
+          </div>
+          <a href="article.html" class="btn-read-more">पूरा पढ्नुहोस् →</a>
+        </div>
+      </article>
+
+      <div class="section-header">
+        <h2>सबै खेलकुद समाचार</h2>
+        <span style="font-size:13px;color:var(--muted);">७२ समाचार</span>
+      </div>
+
+      <div class="news-grid">
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=400&q=80" alt="Football" />
+          <div class="news-card-body">
+            <span class="tag tag-football">फुटबल</span>
+            <h3>ANFA ले नयाँ राष्ट्रिय फुटबल लिगको घोषणा गर्यो</h3>
+            <p>नेपाल फुटबल संघले यस वर्षदेखि नयाँ प्रारूपमा राष्ट्रिय फुटबल लिग सञ्चालन गर्ने घोषणा गरेको छ।</p>
+            <div class="article-meta small"><span>📅 असार ११</span><span>⏱ ३ मिनेट</span></div>
+            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+          </div>
+        </article>
+        <article class="news-card premium">
+          <div class="premium-badge">🔒 Premium</div>
+          <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&q=80" alt="Athletics" />
+          <div class="news-card-body">
+            <span class="tag tag-athletics">एथ्लेटिक्स</span>
+            <h3>SAF खेलमा नेपालले ३ स्वर्ण पदक जित्यो</h3>
+            <p>दक्षिण एशियाली खेलकुदमा नेपाली एथ्लेटहरूले उत्कृष्ट प्रदर्शन गर्दै ३ स्वर्ण पदक जितेका छन्।</p>
+            <div class="article-meta small"><span>📅 असार १०</span><span>⏱ ४ मिनेट</span></div>
+            <a href="subscribe.html" class="read-link premium-lock">🔒 सदस्यता चाहिन्छ →</a>
+          </div>
+        </article>
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80" alt="Martial" />
+          <div class="news-card-body">
+            <span class="tag tag-martial">मार्शल आर्ट</span>
+            <h3>नेपाली तेकान्दो खेलाडीले एशिया कप जिते</h3>
+            <p>नेपाली तेकान्दो खेलाडी रोशन लामाले एशिया कपमा स्वर्ण पदक जित्दै इतिहास रचेका छन्।</p>
+            <div class="article-meta small"><span>📅 असार ९</span><span>⏱ ३ मिनेट</span></div>
+            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+          </div>
+        </article>
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1601412436009-d964bd02edbc?w=400&q=80" alt="Cricket" />
+          <div class="news-card-body">
+            <span class="tag tag-cricket">क्रिकेट</span>
+            <h3>नेपाल क्रिकेट: नयाँ खेलाडीहरूको राष्ट्रिय टिममा प्रवेश</h3>
+            <p>क्रिकेट संघले आगामी श्रृंखलाका लागि नयाँ अनुहारहरूलाई राष्ट्रिय टिममा समावेश गरेको छ।</p>
+            <div class="article-meta small"><span>📅 असार ८</span><span>⏱ २ मिनेट</span></div>
+            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="pagination">
+        <button class="page-btn active">१</button>
+        <button class="page-btn">२</button>
+        <button class="page-btn">३</button>
+        <button class="page-btn">→</button>
+      </div>
+
+    </section>
+
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h3>🔍 खोज्नुहोस्</h3>
+        <div class="search-box"><input type="text" placeholder="खेलकुद खोज्नुहोस्..."/><button>खोज</button></div>
+      </div>
+      <div class="sidebar-widget">
+        <h3>🏏 Cricket Standings</h3>
+        <table class="standings-table">
+          <tr><th>Pos</th><th>Team</th><th>W</th><th>L</th><th>Pts</th></tr>
+          <tr><td class="pos">1</td><td>India</td><td>8</td><td>1</td><td>16</td></tr>
+          <tr><td class="pos">2</td><td>Pakistan</td><td>7</td><td>2</td><td>14</td></tr>
+          <tr><td class="pos">3</td><td>Nepal</td><td>6</td><td>3</td><td>12</td></tr>
+          <tr><td class="pos">4</td><td>AFG</td><td>5</td><td>4</td><td>10</td></tr>
+          <tr><td class="pos">5</td><td>SL</td><td>4</td><td>5</td><td>8</td></tr>
+        </table>
+      </div>
+      <div class="sidebar-widget">
+        <h3>📈 ट्रेन्डिङ</h3>
+        <ol class="trending-list">
+          <li><a href="article.html">नेपाली क्रिकेट T20 विश्वकपमा</a></li>
+          <li><a href="article.html">SAF खेलमा स्वर्ण पदक</a></li>
+          <li><a href="article.html">ANFA नयाँ फुटबल लिग</a></li>
+          <li><a href="article.html">तेकान्दो एशिया कप विजेता</a></li>
+          <li><a href="article.html">नेपाल कबड्डी विश्वकप</a></li>
+        </ol>
+      </div>
+      <div class="sidebar-widget">
+        <h3>📧 Newsletter</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">खेलकुद अपडेट पाउनुहोस्।</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="your@email.com" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+      <div class="sidebar-widget">
+        <h3>🌐 Follow गर्नुहोस्</h3>
+        <div class="social-links">
+          <a href="#" class="social-btn fb">Facebook</a>
+          <a href="#" class="social-btn yt">YouTube</a>
+          <a href="#" class="social-btn tw">Twitter/X</a>
+          <a href="#" class="social-btn wa">WhatsApp</a>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-col"><h4>नेपाल समाचार</h4><p>नेपालको विश्वसनीय समाचार स्रोत।</p></div>
+      <div class="footer-col"><h4>विभाग | Sections</h4><ul><li><a href="news.html">समाचार</a></li><li><a href="blog.html">ब्लग</a></li><li><a href="politics.html">राजनीति</a></li><li><a href="technology.html">प्रविधि</a></li><li><a href="sports.html">खेलकुद</a></li></ul></div>
+      <div class="footer-col"><h4>जानकारी</h4><ul><li><a href="about.html">हाम्रो बारे</a></li><li><a href="contact.html">सम्पर्क</a></li><li><a href="privacy.html">गोपनीयता नीति</a></li></ul></div>
+      <div class="footer-col"><h4>सम्पर्क</h4><p>📍 काठमाडौं, नेपाल</p><p>📧 info@nepalsamachar.com</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2081 नेपाल समाचार | Nepal Samachar. सर्वाधिकार सुरक्षित।</p></div>
+  </footer>
+
+  <script>
+    function updateTime() {
+      const el = document.getElementById('datetime');
+      if (el) el.textContent = new Date().toLocaleString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+    }
+    updateTime(); setInterval(updateTime, 60000);
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
