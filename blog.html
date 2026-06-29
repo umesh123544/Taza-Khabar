@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ब्लग | Blog — Nepal Samachar</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Serif+Devanagari:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #e67e22; --orange-dark: #ca6f1e; --orange-light: #fef5ec;
+      --bg: #f5f5f5; --white: #fff; --text: #1a1a1a; --muted: #666; --border: #e0e0e0;
+      --red: #c0392b;
+    }
+    body { font-family: 'Inter', 'Noto Sans Devanagari', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; }
+    a { text-decoration: none; color: inherit; }
+    img { width: 100%; display: block; object-fit: cover; }
+    .topbar { background: var(--text); color: #ccc; font-size: 12px; padding: 6px 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .topbar-inner { display: flex; justify-content: space-between; align-items: center; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .topbar-right a { color: #ccc; }
+    .btn-login { background: var(--red); color: #fff !important; padding: 3px 12px; border-radius: 3px; font-size: 11px; }
+    .header { background: var(--white); border-bottom: 3px solid var(--orange); box-shadow: 0 2px 6px rgba(0,0,0,.07); position: sticky; top: 0; z-index: 100; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
+    .logo a { display: flex; align-items: center; }
+    .logo-img { height: 50px; width: auto; object-fit: contain; display: block; }
+    .main-nav { display: flex; align-items: center; gap: 4px; }
+    .main-nav a { padding: 7px 12px; border-radius: 4px; font-size: 14px; font-weight: 500; color: var(--text); transition: background .2s, color .2s; }
+    .main-nav a:hover, .main-nav a.active { background: var(--red); color: #fff; }
+    .nav-subscribe { background: var(--red) !important; color: #fff !important; }
+    .hamburger { display: none; background: none; border: none; font-size: 22px; cursor: pointer; }
+    .breaking { background: #222; color: #fff; padding: 7px 0; overflow: hidden; }
+    .breaking-inner { display: flex; align-items: center; gap: 12px; }
+    .breaking-label { background: var(--red); color: #fff; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 2px; white-space: nowrap; text-transform: uppercase; letter-spacing: 1px; }
+    .ticker-wrap { overflow: hidden; flex: 1; }
+    .ticker { white-space: nowrap; animation: ticker 30s linear infinite; font-size: 13px; }
+    @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+    /* PAGE HERO - Blog style */
+    .page-hero { background: linear-gradient(135deg, #d35400 0%, var(--orange) 100%); color: #fff; padding: 32px 0 24px; }
+    .page-hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 6px; }
+    .page-hero p { opacity: .85; font-size: 14px; }
+    .breadcrumb { font-size: 12px; opacity: .7; margin-bottom: 10px; }
+    .breadcrumb a { color: #fff; opacity: .8; }
+
+    /* FILTER BAR */
+    .filter-bar { background: var(--white); border-bottom: 1px solid var(--border); }
+    .filter-bar-inner { display: flex; overflow-x: auto; }
+    .filter-btn { padding: 14px 20px; font-size: 13px; font-weight: 500; border: none; background: none; cursor: pointer; border-bottom: 3px solid transparent; color: var(--muted); white-space: nowrap; transition: all .2s; }
+    .filter-btn:hover { color: var(--orange); }
+    .filter-btn.active { color: var(--orange); border-bottom-color: var(--orange); font-weight: 600; }
+
+    /* LAYOUT */
+    .main-layout { display: grid; grid-template-columns: 1fr 320px; gap: 28px; padding: 28px 20px; }
+    .content-main { min-width: 0; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--orange); }
+    .section-header h2 { font-size: 1.1rem; font-weight: 700; }
+    .section-header a { font-size: 13px; color: var(--orange); font-weight: 500; }
+
+    /* FEATURED BLOG */
+    .blog-featured { background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.08); margin-bottom: 28px; display: grid; grid-template-columns: 1fr 1fr; }
+    .blog-featured img { height: 300px; object-fit: cover; }
+    .blog-featured-body { padding: 28px; display: flex; flex-direction: column; justify-content: center; }
+    .author-info { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .author-name { font-size: 14px; font-weight: 600; }
+    .author-date { font-size: 12px; color: var(--muted); }
+    .blog-featured-body h2 { font-size: 1.4rem; font-weight: 700; line-height: 1.4; margin-bottom: 12px; font-family: 'Noto Serif Devanagari', 'Noto Sans Devanagari', serif; }
+    .blog-featured-body p { color: #555; font-size: .9rem; line-height: 1.7; margin-bottom: 16px; }
+    .tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 2px; text-transform: uppercase; letter-spacing: .4px; color: #fff; margin-bottom: 10px; }
+    .tag-blog { background: var(--orange); }
+    .tag-travel { background: #1abc9c; }
+    .tag-culture { background: #9b59b6; }
+    .tag-lifestyle { background: #e74c3c; }
+    .tag-youth { background: #3498db; }
+    .tag-food { background: #e67e22; }
+    .btn-read { display: inline-block; background: var(--orange); color: #fff; padding: 9px 20px; border-radius: 5px; font-size: 13px; font-weight: 600; transition: background .2s; }
+    .btn-read:hover { background: var(--orange-dark); }
+
+    /* BLOG GRID */
+    .blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 28px; }
+    .blog-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 5px rgba(0,0,0,.06); transition: box-shadow .2s, transform .2s; }
+    .blog-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.1); transform: translateY(-2px); }
+    .blog-card img { height: 180px; object-fit: cover; }
+    .blog-card-body { padding: 16px; }
+    .blog-card-body h3 { font-size: .95rem; font-weight: 600; line-height: 1.5; margin: 8px 0 8px; font-family: 'Noto Serif Devanagari', 'Noto Sans Devanagari', serif; }
+    .blog-card-body p { font-size: .82rem; color: #555; line-height: 1.6; margin-bottom: 12px; }
+    .blog-meta { display: flex; align-items: center; justify-content: space-between; }
+    .blog-meta-left { font-size: 11px; color: var(--muted); }
+    .read-link { font-size: 12px; color: var(--orange); font-weight: 600; }
+
+    /* OPINION SECTION */
+    .opinion-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 28px; }
+    .opinion-item { background: var(--white); padding: 16px; display: flex; gap: 14px; align-items: flex-start; transition: background .15s; }
+    .opinion-item:hover { background: #fffbf5; }
+    .opinion-num { font-size: 1.8rem; font-weight: 700; color: #f0d090; line-height: 1; min-width: 36px; }
+    .opinion-body h4 { font-size: .9rem; font-weight: 600; margin-bottom: 4px; font-family: 'Noto Serif Devanagari', serif; }
+    .opinion-body p { font-size: .8rem; color: var(--muted); }
+
+    /* SIDEBAR */
+    .sidebar { min-width: 0; }
+    .sidebar-widget { background: var(--white); border-radius: 8px; padding: 18px; margin-bottom: 20px; box-shadow: 0 1px 5px rgba(0,0,0,.05); }
+    .sidebar-widget h3 { font-size: .95rem; font-weight: 700; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--orange); }
+    .search-box { display: flex; gap: 6px; }
+    .search-box input { flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; outline: none; }
+    .search-box input:focus { border-color: var(--orange); }
+    .search-box button { background: var(--orange); color: #fff; border: none; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600; }
+    .popular-authors { display: flex; flex-direction: column; gap: 12px; }
+    .author-card { display: flex; align-items: center; gap: 10px; }
+    .author-card img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .author-card-info strong { display: block; font-size: 13px; font-weight: 600; }
+    .author-card-info span { font-size: 11px; color: var(--muted); }
+    .topics-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+    .topic-tag { padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; font-size: 12px; color: var(--muted); cursor: pointer; transition: all .2s; }
+    .topic-tag:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-light); }
+    .trending-list { padding-left: 18px; }
+    .trending-list li { margin-bottom: 10px; }
+    .trending-list a { font-size: 13px; line-height: 1.5; color: var(--text); font-family: 'Noto Sans Devanagari', sans-serif; }
+    .trending-list a:hover { color: var(--orange); }
+    .newsletter-form { display: flex; flex-direction: column; gap: 8px; }
+    .newsletter-form input { padding: 9px 12px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; outline: none; }
+    .newsletter-form button { background: var(--orange); color: #fff; border: none; padding: 9px; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 13px; }
+    .social-links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .social-btn { display: block; text-align: center; padding: 8px; border-radius: 4px; font-size: 12px; font-weight: 600; color: #fff; transition: opacity .2s; }
+    .social-btn:hover { opacity: .85; }
+    .fb { background: #1877f2; } .yt { background: #ff0000; } .tw { background: #000; } .wa { background: #25d366; }
+
+    /* PAGINATION */
+    .pagination { display: flex; gap: 6px; justify-content: center; margin: 28px 0; }
+    .page-btn { padding: 8px 14px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; cursor: pointer; background: var(--white); color: var(--text); transition: all .2s; }
+    .page-btn:hover, .page-btn.active { background: var(--orange); color: #fff; border-color: var(--orange); }
+
+    /* FOOTER */
+    .footer { background: #1a1a1a; color: #aaa; padding: 40px 0 0; margin-top: 40px; }
+    .footer-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; padding-bottom: 28px; }
+    .footer-col h4 { color: #fff; font-size: .9rem; margin-bottom: 14px; }
+    .footer-col p { font-size: 13px; line-height: 1.8; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 6px; }
+    .footer-col ul li a { font-size: 13px; color: #aaa; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid #333; text-align: center; padding: 16px; font-size: 12px; }
+
+    @media (max-width: 900px) { .main-layout, .blog-featured { grid-template-columns: 1fr; } .footer-inner { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 600px) { 
+      .blog-grid { grid-template-columns: 1fr; } 
+      .main-nav { display: none; } 
+      .hamburger { display: block; } 
+      .logo-img { height: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span id="datetime"></span>
+      <div class="topbar-right">
+        <a href="#">नेपाली</a><span>|</span><a href="#">English</a>
+        <a href="login.html" class="btn-login">Login / लगइन</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html">
+          <img src="https://i.ibb.co/fGz4qtwn/dhamadhamkhabar.png" alt="धमाधम खबर" class="logo-img" />
+        </a>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html">गृहपृष्ठ</a>
+        <a href="news.html">समाचार</a>
+        <a href="blog.html" class="active">ब्लग</a>
+        <a href="politics.html">राजनीति</a>
+        <a href="technology.html">प्रविधि</a>
+        <a href="sports.html">खेलकुद</a>
+        <a href="subscribe.html" class="nav-subscribe">सदस्यता</a>
+      </nav>
+      <button class="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <div class="breaking">
+    <div class="container breaking-inner">
+      <span class="breaking-label">Breaking</span>
+      <div class="ticker-wrap"><div class="ticker">&nbsp;&nbsp;&nbsp; 🔴 नेपाल सरकारले नयाँ बजेट घोषणा गर्यो &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 🔴 काठमाडौंमा भारी वर्षाको सम्भावना &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 🔴 Nepal's GDP grows by 4.5% &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 🔴 नेपाली क्रिकेट टोलीले विश्वकप छनोटमा जित हासिल गर्यो</div></div>
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">गृहपृष्ठ</a> › ब्लग</div>
+      <h1>✍️ ब्लग | Blog</h1>
+      <p>विचार, अनुभव र कथाहरू — Thoughts, experiences and stories from Nepal</p>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="container filter-bar-inner">
+      <button class="filter-btn active">सबै | All</button>
+      <button class="filter-btn">यात्रा | Travel</button>
+      <button class="filter-btn">संस्कृति | Culture</button>
+      <button class="filter-btn">जीवनशैली | Lifestyle</button>
+      <button class="filter-btn">युवा | Youth</button>
+      <button class="filter-btn">खाना | Food</button>
+      <button class="filter-btn">विचार | Opinion</button>
+    </div>
+  </div>
+
+  <main class="container main-layout">
+    <section class="content-main">
+
+      <!-- FEATURED BLOG -->
+      <article class="blog-featured">
+        <img src="https://images.unsplash.com/photo-1558008258-3256797b43f3?w=600&q=80" alt="Featured Blog" />
+        <div class="blog-featured-body">
+          <span class="tag tag-youth">युवा | Youth</span>
+          <div class="author-info">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80" alt="Author" class="author-avatar" />
+            <div><div class="author-name">सुनिता तामाङ</div><div class="author-date">📅 असार ८, २०८१</div></div>
+          </div>
+          <h2>नेपालको भविष्य: युवा पुस्ताको भूमिका र जिम्मेवारी</h2>
+          <p>नेपालको विकासमा युवाहरूको योगदान र आउँदो दिनमा के गर्न सकिन्छ भन्ने बारेमा एक गहन विश्लेषण। हाम्रो युवा पुस्ताले देशलाई नयाँ दिशा दिन सक्छन्।</p>
+          <a href="article.html" class="btn-read">पूरा पढ्नुहोस् →</a>
+        </div>
+      </article>
+
+      <div class="section-header">
+        <h2>ताजा ब्लगहरू | Latest Blogs</h2>
+        <span style="font-size:13px;color:var(--muted);">४८ लेखहरू</span>
+      </div>
+
+      <div class="blog-grid">
+        <article class="blog-card">
+          <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400&q=80" alt="Himalayas" />
+          <div class="blog-card-body">
+            <span class="tag tag-travel">यात्रा</span>
+            <h3>हिमालय यात्रा: अन्नपूर्ण बेस क्याम्पको अविस्मरणीय अनुभव</h3>
+            <p>मेरो अन्नपूर्ण बेस क्याम्प यात्राको अनुभव र केही महत्वपूर्ण सुझावहरू जुन हरेक ट्रेकरलाई काम लाग्छन्।</p>
+            <div class="blog-meta">
+              <div class="blog-meta-left"><span>✎ आकाश गुरुङ</span> · <span>📅 असार ७</span></div>
+              <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+            </div>
+          </div>
+        </article>
+        <article class="blog-card">
+          <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=400&q=80" alt="Culture" />
+          <div class="blog-card-body">
+            <span class="tag tag-culture">संस्कृति</span>
+            <h3>नेपाली चाडपर्वको महत्व: दसैं र तिहारको अर्थ</h3>
+            <p>हाम्रा चाडपर्वहरू केवल परम्परा मात्र नभई हाम्रो पहिचान र संस्कृतिको जीवन्त अभिव्यक्ति हुन्।</p>
+            <div class="blog-meta">
+              <div class="blog-meta-left"><span>✎ मीना रेग्मी</span> · <span>📅 असार ६</span></div>
+              <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+            </div>
+          </div>
+        </article>
+        <article class="blog-card">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt="Food" />
+          <div class="blog-card-body">
+            <span class="tag tag-food">खाना</span>
+            <h3>नेपाली खानाको स्वाद: दाल भात तरकारी र त्यसभन्दा पर</h3>
+            <p>नेपाली खानपानको विविधता र यसको सांस्कृतिक महत्वबारे एक पाककला यात्रा।</p>
+            <div class="blog-meta">
+              <div class="blog-meta-left"><span>✎ प्रिया श्रेष्ठ</span> · <span>📅 असार ५</span></div>
+              <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+            </div>
+          </div>
+        </article>
+        <article class="blog-card">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&q=80" alt="Youth" />
+          <div class="blog-card-body">
+            <span class="tag tag-lifestyle">जीवनशैली</span>
+            <h3>काठमाडौंमा स्वस्थ जीवनशैली: चुनौती र समाधान</h3>
+            <p>शहरी जीवनमा स्वास्थ्यको ख्याल राख्ने तरिकाहरू र आधुनिक नेपालीहरूका सफलताका कथाहरू।</p>
+            <div class="blog-meta">
+              <div class="blog-meta-left"><span>✎ राजेश पौडेल</span> · <span>📅 असार ४</span></div>
+              <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- OPINION SECTION -->
+      <div class="section-header">
+        <h2>विचार | Opinion</h2>
+        <a href="#">सबै हेर्नुहोस् →</a>
+      </div>
+      <div class="opinion-list">
+        <div class="opinion-item">
+          <div class="opinion-num">०१</div>
+          <div class="opinion-body">
+            <h4>नेपालको शिक्षा प्रणाली: परिवर्तनको आवश्यकता</h4>
+            <p>✎ डा. सुरेश अधिकारी · 📅 असार ३</p>
+          </div>
+        </div>
+        <div class="opinion-item">
+          <div class="opinion-num">०२</div>
+          <div class="opinion-body">
+            <h4>प्रवासी नेपालीको देश फर्किने सपना: यथार्थ र भ्रम</h4>
+            <p>✎ अनिता कार्की · 📅 असार २</p>
+          </div>
+        </div>
+        <div class="opinion-item">
+          <div class="opinion-num">०३</div>
+          <div class="opinion-body">
+            <h4>जलवायु परिवर्तन र नेपालको पहाडी समुदाय</h4>
+            <p>✎ विनोद राई · 📅 असार १</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination">
+        <button class="page-btn active">१</button>
+        <button class="page-btn">२</button>
+        <button class="page-btn">३</button>
+        <button class="page-btn">→</button>
+      </div>
+
+    </section>
+
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h3>🔍 खोज्नुहोस्</h3>
+        <div class="search-box">
+          <input type="text" placeholder="ब्लग खोज्नुहोस्..." />
+          <button>खोज</button>
+        </div>
+      </div>
+      <div class="sidebar-widget">
+        <h3>✍️ लोकप्रिय लेखकहरू</h3>
+        <div class="popular-authors">
+          <div class="author-card">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80" alt="Author" />
+            <div class="author-card-info"><strong>सुनिता तामाङ</strong><span>१२ लेखहरू</span></div>
+          </div>
+          <div class="author-card">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80" alt="Author" />
+            <div class="author-card-info"><strong>आकाश गुरुङ</strong><span>८ लेखहरू</span></div>
+          </div>
+          <div class="author-card">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80" alt="Author" />
+            <div class="author-card-info"><strong>मीना रेग्मी</strong><span>७ लेखहरू</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-widget">
+        <h3>🏷️ विषयहरू | Topics</h3>
+        <div class="topics-cloud">
+          <span class="topic-tag">यात्रा</span><span class="topic-tag">संस्कृति</span>
+          <span class="topic-tag">खाना</span><span class="topic-tag">जीवनशैली</span>
+          <span class="topic-tag">युवा</span><span class="topic-tag">शिक्षा</span>
+          <span class="topic-tag">स्वास्थ्य</span><span class="topic-tag">प्रविधि</span>
+          <span class="topic-tag">विचार</span><span class="topic-tag">कला</span>
+        </div>
+      </div>
+      <div class="sidebar-widget">
+        <h3>📈 लोकप्रिय | Popular</h3>
+        <ol class="trending-list">
+          <li><a href="article.html">नेपालको भविष्य: युवा पुस्ताको भूमिका</a></li>
+          <li><a href="article.html">हिमालय यात्रा: अन्नपूर्णको अनुभव</a></li>
+          <li><a href="article.html">नेपाली खानाको स्वाद</a></li>
+          <li><a href="article.html">काठमाडौंमा स्वस्थ जीवनशैली</a></li>
+        </ol>
+      </div>
+      <div class="sidebar-widget">
+        <h3>📧 Newsletter</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">नयाँ ब्लग सूचना पाउनुहोस्।</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="your@email.com" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-col"><h4>नेपाल समाचार</h4><p>नेपालको विश्वसनीय समाचार स्रोत।</p></div>
+      <div class="footer-col"><h4>विभाग | Sections</h4><ul><li><a href="news.html">समाचार</a></li><li><a href="blog.html">ब्लग</a></li><li><a href="politics.html">राजनीति</a></li><li><a href="technology.html">प्रविधि</a></li><li><a href="sports.html">खेलकुद</a></li></ul></div>
+      <div class="footer-col"><h4>जानकारी | Info</h4><ul><li><a href="about.html">हाम्रो बारे</a></li><li><a href="contact.html">सम्पर्क</a></li><li><a href="privacy.html">गोपनीयता नीति</a></li></ul></div>
+      <div class="footer-col"><h4>सम्पर्क | Contact</h4><p>📍 काठमाडौं, नेपाल</p><p>📧 info@nepalsamachar.com</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2081 नेपाल समाचार | Nepal Samachar. सर्वाधिकार सुरक्षित।</p></div>
+  </footer>
+
+  <script>
+    function updateTime() {
+      const now = new Date();
+      const el = document.getElementById('datetime');
+      if (el) el.textContent = now.toLocaleString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+    }
+    updateTime(); setInterval(updateTime, 60000);
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
