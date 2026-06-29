@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premium सदस्यता | नेपाल समाचार</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Serif+Devanagari:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    .sub-page { padding: 40px 16px; }
+    .sub-hero { text-align: center; margin-bottom: 40px; }
+    .sub-hero h1 { font-family: 'Noto Serif Devanagari', serif; font-size: 28px; color: #1a2744; margin-bottom: 10px; }
+    .sub-hero p { color: #555; font-size: 15px; max-width: 560px; margin: 0 auto; }
+    .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 860px; margin: 0 auto 40px; }
+    .plan-card { background: white; border-radius: 12px; padding: 28px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); border: 2px solid #dee2e6; position: relative; transition: transform 0.2s; }
+    .plan-card:hover { transform: translateY(-4px); }
+    .plan-card.featured { border-color: #d4a017; }
+    .plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #d4a017; color: #1a2744; font-size: 11px; font-weight: 700; padding: 4px 16px; border-radius: 20px; font-family: var(--font-en); white-space: nowrap; }
+    .plan-name { font-size: 18px; font-weight: 700; color: #1a2744; margin-bottom: 8px; }
+    .plan-price { font-size: 32px; font-weight: 700; color: #c0392b; font-family: var(--font-en); }
+    .plan-price span { font-size: 14px; color: #6c757d; font-weight: 400; }
+    .plan-features { margin: 16px 0; }
+    .plan-features li { font-size: 14px; color: #495057; padding: 6px 0; border-bottom: 1px solid #f0f0f0; display: flex; gap: 8px; }
+    .plan-features li:last-child { border-bottom: none; }
+    .btn-plan { display: block; text-align: center; padding: 12px; border-radius: 6px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: var(--font-ne); text-decoration: none; margin-top: 16px; }
+    .btn-plan-primary { background: #c0392b; color: white; border: none; }
+    .btn-plan-primary:hover { background: #922b21; color: white; }
+    .btn-plan-outline { background: white; color: #1a2744; border: 2px solid #1a2744; }
+    .btn-plan-outline:hover { background: #1a2744; color: white; }
+    .payment-section { background: white; border-radius: 12px; padding: 32px; max-width: 560px; margin: 0 auto; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .payment-section h2 { font-size: 20px; color: #1a2744; margin-bottom: 20px; }
+    .payment-methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .pay-btn { padding: 12px 8px; border: 2px solid #dee2e6; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; background: white; text-align: center; transition: all 0.2s; font-family: var(--font-en); }
+    .pay-btn:hover, .pay-btn.active { border-color: #c0392b; background: #fdf2f2; color: #c0392b; }
+    .pay-btn .pay-icon { font-size: 24px; display: block; margin-bottom: 4px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 14px; color: #495057; margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid #dee2e6; border-radius: 6px; font-family: var(--font-en); font-size: 15px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .btn-pay { width: 100%; background: #c0392b; color: white; border: none; padding: 14px; border-radius: 6px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: var(--font-ne); margin-top: 8px; transition: background 0.2s; }
+    .btn-pay:hover { background: #922b21; }
+    .secure-note { text-align: center; font-size: 12px; color: #6c757d; margin-top: 10px; font-family: var(--font-en); }
+    .success-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999; align-items: center; justify-content: center; }
+    .success-overlay.show { display: flex; }
+    .success-box { background: white; border-radius: 16px; padding: 40px; text-align: center; max-width: 360px; }
+    .success-box .icon { font-size: 60px; margin-bottom: 16px; }
+    .success-box h2 { color: #2e7d32; margin-bottom: 8px; }
+    .success-box p { color: #555; font-size: 14px; margin-bottom: 20px; }
+    .esewa-color { color: #60bb46; }
+    .khalti-color { color: #5c2d91; }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <div class="topbar"><div class="container topbar-inner"><a href="index.html" style="color:#cdd5e0">← गृहपृष्ठमा फर्कनुहोस्</a><span style="color:#6c757d; font-family:var(--font-en)">Secure Payment</span></div></div>
+
+  <main class="sub-page container">
+    <div class="sub-hero">
+      <h1>⭐ Premium सदस्यता लिनुहोस्</h1>
+      <p>सबै प्रिमियम समाचार, गहन विश्लेषण, र विज्ञापन-मुक्त अनुभव प्राप्त गर्नुहोस्। नेपालको सबैभन्दा विश्वसनीय समाचार स्रोतमा पहुँच पाउनुहोस्।</p>
+    </div>
+
+    <!-- PLANS -->
+    <div class="plans-grid">
+      <div class="plan-card">
+        <p class="plan-name">🆓 निःशुल्क | Free</p>
+        <div class="plan-price">रू. ०<span>/महिना</span></div>
+        <ul class="plan-features">
+          <li>✅ ५ समाचार/दिन</li>
+          <li>✅ मूल समाचार</li>
+          <li>❌ प्रिमियम विश्लेषण</li>
+          <li>❌ विज्ञापन-मुक्त</li>
+          <li>❌ PDF डाउनलोड</li>
+        </ul>
+        <a href="index.html" class="btn-plan btn-plan-outline">निःशुल्क जारी राख्नुहोस्</a>
+      </div>
+
+      <div class="plan-card">
+        <p class="plan-name">📰 मासिक | Monthly</p>
+        <div class="plan-price">रू. ५००<span>/महिना</span></div>
+        <ul class="plan-features">
+          <li>✅ असीमित समाचार</li>
+          <li>✅ प्रिमियम विश्लेषण</li>
+          <li>✅ विज्ञापन-मुक्त</li>
+          <li>✅ PDF डाउनलोड</li>
+          <li>✅ Newsletter</li>
+        </ul>
+        <button class="btn-plan btn-plan-primary" onclick="selectPlan('monthly', 500)">छान्नुहोस् →</button>
+      </div>
+
+      <div class="plan-card featured">
+        <div class="plan-badge">🔥 सबैभन्दा राम्रो मूल्य</div>
+        <p class="plan-name">🏆 वार्षिक | Annual</p>
+        <div class="plan-price">रू. ४,५००<span>/वर्ष</span></div>
+        <p style="font-size:12px; color:#2e7d32; font-family:var(--font-en); margin-bottom:4px">Save रू. 1,500!</p>
+        <ul class="plan-features">
+          <li>✅ असीमित समाचार</li>
+          <li>✅ प्रिमियम विश्लेषण</li>
+          <li>✅ विज्ञापन-मुक्त</li>
+          <li>✅ PDF डाउनलोड</li>
+          <li>✅ Newsletter + Priority</li>
+        </ul>
+        <button class="btn-plan btn-plan-primary" onclick="selectPlan('annual', 4500)">छान्नुहोस् →</button>
+      </div>
+    </div>
+
+    <!-- PAYMENT FORM -->
+    <div class="payment-section" id="payment-section" style="display:none">
+      <h2>💳 भुक्तानी गर्नुहोस् | Payment</h2>
+      <p id="selected-plan-info" style="background:#f8f9fa; padding:10px 14px; border-radius:6px; margin-bottom:20px; font-size:14px; color:#495057;"></p>
+
+      <p style="font-size:14px; font-weight:600; margin-bottom:10px; color:#1a2744;">भुक्तानी विधि छान्नुहोस् | Choose Payment Method</p>
+      <div class="payment-methods">
+        <button class="pay-btn" onclick="selectPayment('esewa')">
+          <span class="pay-icon esewa-color">💚</span>eSewa
+        </button>
+        <button class="pay-btn" onclick="selectPayment('khalti')">
+          <span class="pay-icon khalti-color">💜</span>Khalti
+        </button>
+        <button class="pay-btn" onclick="selectPayment('bank')">
+          <span class="pay-icon">🏦</span>Bank Transfer
+        </button>
+        <button class="pay-btn" onclick="selectPayment('card')">
+          <span class="pay-icon">💳</span>Card
+        </button>
+      </div>
+
+      <!-- ESEWA FORM -->
+      <div id="esewa-form" style="display:none">
+        <div style="background:#f0faf0; border: 1px solid #b8dfb8; border-radius:8px; padding:16px; margin-bottom:16px;">
+          <p style="font-size:14px; color:#2e7d32; font-weight:600;">eSewa मार्फत भुक्तानी गर्न:</p>
+          <ol style="font-size:13px; color:#495057; padding-left:16px; margin-top:8px;">
+            <li>आफ्नो eSewa ID तयार राख्नुहोस्</li>
+            <li>तल आफ्नो eSewa नम्बर राख्नुहोस्</li>
+            <li>"भुक्तानी गर्नुहोस्" थिच्नुहोस्</li>
+            <li>eSewa App मा OTP पुष्टि गर्नुहोस्</li>
+          </ol>
+        </div>
+        <div class="form-group">
+          <label>eSewa ID / मोबाइल नम्बर</label>
+          <input type="tel" id="esewa-id" placeholder="98XXXXXXXX" />
+        </div>
+        <button class="btn-pay" onclick="processPayment('eSewa')">💚 eSewa बाट भुक्तानी गर्नुहोस्</button>
+      </div>
+
+      <!-- KHALTI FORM -->
+      <div id="khalti-form" style="display:none">
+        <div style="background:#f5f0ff; border: 1px solid #c9b8e8; border-radius:8px; padding:16px; margin-bottom:16px;">
+          <p style="font-size:14px; color:#5c2d91; font-weight:600;">Khalti मार्फत भुक्तानी गर्न:</p>
+          <ol style="font-size:13px; color:#495057; padding-left:16px; margin-top:8px;">
+            <li>आफ्नो Khalti खाता तयार राख्नुहोस्</li>
+            <li>मोबाइल नम्बर दिनुहोस्</li>
+            <li>Khalti App मा OTP पुष्टि गर्नुहोस्</li>
+          </ol>
+        </div>
+        <div class="form-group">
+          <label>Khalti मोबाइल नम्बर</label>
+          <input type="tel" id="khalti-id" placeholder="98XXXXXXXX" />
+        </div>
+        <button class="btn-pay" onclick="processPayment('Khalti')" style="background:#5c2d91;">💜 Khalti बाट भुक्तानी गर्नुहोस्</button>
+      </div>
+
+      <!-- BANK FORM -->
+      <div id="bank-form" style="display:none">
+        <div style="background:#fff3e0; border: 1px solid #ffe0b2; border-radius:8px; padding:16px; margin-bottom:16px;">
+          <p style="font-size:14px; font-weight:600; color:#e65100;">बैंक विवरण | Bank Details</p>
+          <p style="font-size:13px; color:#495057; margin-top:8px;">बैंक: Nepal Investment Bank<br/>खाता नाम: Nepal Samachar Pvt. Ltd.<br/>खाता नम्बर: 012345678901234<br/>Branch: Kathmandu, Newroad</p>
+        </div>
+        <div class="form-group"><label>तपाईंको नाम | Your Name</label><input type="text" placeholder="राम बहादुर श्रेष्ठ" /></div>
+        <div class="form-group"><label>रसिद नम्बर | Receipt No.</label><input type="text" placeholder="TXN123456" /></div>
+        <button class="btn-pay" onclick="processPayment('Bank Transfer')">🏦 पुष्टि गर्नुहोस् | Confirm</button>
+      </div>
+
+      <!-- CARD FORM -->
+      <div id="card-form" style="display:none">
+        <div class="form-group"><label>Card Number</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19" id="card-num" /></div>
+        <div class="form-row">
+          <div class="form-group"><label>Expiry Date</label><input type="text" placeholder="MM/YY" maxlength="5" /></div>
+          <div class="form-group"><label>CVV</label><input type="text" placeholder="123" maxlength="3" /></div>
+        </div>
+        <div class="form-group"><label>Name on Card</label><input type="text" placeholder="RAM BAHADUR SHRESTHA" /></div>
+        <button class="btn-pay" onclick="processPayment('Card')">💳 Pay Now</button>
+      </div>
+
+      <p class="secure-note">🔒 तपाईंको भुक्तानी सुरक्षित र एन्क्रिप्टेड छ | Your payment is secure and encrypted</p>
+    </div>
+  </main>
+
+  <!-- SUCCESS OVERLAY -->
+  <div class="success-overlay" id="success-overlay">
+    <div class="success-box">
+      <div class="icon">🎉</div>
+      <h2>बधाई छ! Congratulations!</h2>
+      <p>तपाईंको Premium सदस्यता सफलतापूर्वक सक्रिय भयो। अब सबै प्रिमियम सामग्री उपलब्ध छ।</p>
+      <a href="index.html" style="display:block; background:#c0392b; color:white; padding:12px; border-radius:6px; font-weight:700; font-family:var(--font-ne);">गृहपृष्ठमा जानुहोस् →</a>
+    </div>
+  </div>
+
+  <script>
+    let selectedPlan = null;
+    let selectedAmount = 0;
+
+    function selectPlan(plan, amount) {
+      selectedPlan = plan;
+      selectedAmount = amount;
+      document.getElementById('payment-section').style.display = 'block';
+      document.getElementById('selected-plan-info').textContent =
+        plan === 'monthly'
+          ? '📰 मासिक योजना — रू. 500/महिना'
+          : '🏆 वार्षिक योजना — रू. 4,500/वर्ष (रू. 1,500 बचत!)';
+      document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function selectPayment(method) {
+      ['esewa-form','khalti-form','bank-form','card-form'].forEach(id => {
+        document.getElementById(id).style.display = 'none';
+      });
+      document.querySelectorAll('.pay-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(method + '-form').style.display = 'block';
+      event.currentTarget.classList.add('active');
+    }
+
+    function processPayment(method) {
+      // In a real site, this would connect to eSewa/Khalti API
+      // For now, show success and save to localStorage
+      const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      user.isPremium = true;
+      user.plan = selectedPlan;
+      user.paymentMethod = method;
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      document.getElementById('success-overlay').classList.add('show');
+    }
+
+    // Card number formatting
+    const cardInput = document.getElementById('card-num');
+    if (cardInput) {
+      cardInput.addEventListener('input', function() {
+        let v = this.value.replace(/\D/g, '').substring(0, 16);
+        this.value = v.replace(/(.{4})/g, '$1 ').trim();
+      });
+    }
+  </script>
+</body>
+</html>
