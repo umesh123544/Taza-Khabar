@@ -468,13 +468,13 @@
         </a>
       </div>
       <nav class="main-nav" id="main-nav">
-        <a href="index.html">गृहपृष्ठ</a>
-        <a href="news.html">समाचार</a>
-        <a href="blog.html">ब्लग</a>
-        <a href="politics.html">राजनीति</a>
-        <a href="technology.html">प्रविधि</a>
-        <a href="sports.html">खेलकुद</a>
-        <a href="subscribe.html" class="nav-subscribe active">सदस्यता</a>
+        <a href="index.html" id="nav-home">गृहपृष्ठ</a>
+        <a href="news.html" id="nav-news">समाचार</a>
+        <a href="blog.html" id="nav-blog">ब्लग</a>
+        <a href="politics.html" id="nav-politics">राजनीति</a>
+        <a href="technology.html" id="nav-tech">प्रविधि</a>
+        <a href="sports.html" id="nav-sports">खेलकुद</a>
+        <a href="subscribe.html" class="nav-subscribe active" id="nav-subscribe">सदस्यता</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
     </div>
@@ -739,21 +739,24 @@
       });
     }
 
-    // ===== NAVIGATION ACTIVE STATE =====
-    // This ensures only the current page's link stays active
-    document.addEventListener('DOMContentLoaded', function() {
-      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-      const navLinks = document.querySelectorAll('.main-nav a');
-      navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === currentPage) {
-          link.classList.add('active');
-          // If it's the subscribe link, also add the nav-subscribe active class
-          if (link.classList.contains('nav-subscribe')) {
-            link.classList.add('active');
+    // ===== REMOVE ACTIVE STATE WHEN CLICKING OTHER LINKS =====
+    document.querySelectorAll('.main-nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        // Get the href of the clicked link
+        const href = this.getAttribute('href');
+        
+        // If it's not the current page, remove active from all links
+        // The page will reload and the new page will handle its own active state
+        // But we remove it here so the red indicator disappears immediately
+        if (href !== 'subscribe.html' && href !== '#') {
+          document.querySelectorAll('.main-nav a').forEach(l => {
+            l.classList.remove('active');
+          });
+          // Remove active from subscribe specifically
+          const subscribeLink = document.getElementById('nav-subscribe');
+          if (subscribeLink) {
+            subscribeLink.classList.remove('active');
           }
-        } else {
-          link.classList.remove('active');
         }
       });
     });
