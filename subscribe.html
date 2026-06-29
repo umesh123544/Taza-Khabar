@@ -502,7 +502,7 @@
     <!-- PLANS -->
     <div class="plans-grid">
       <div class="plan-card">
-        <p class="plan-name">🆓 निःशुल्क | Free</p>
+        <p class="plan-name">🆓 निःशुल्क</p>
         <div class="plan-price">रू. ०<span>/महिना</span></div>
         <ul class="plan-features">
           <li>✅ ५ समाचार/दिन</li>
@@ -515,7 +515,7 @@
       </div>
 
       <div class="plan-card">
-        <p class="plan-name">📰 मासिक | Monthly</p>
+        <p class="plan-name">📰 मासिक</p>
         <div class="plan-price">रू. ५००<span>/महिना</span></div>
         <ul class="plan-features">
           <li>✅ असीमित समाचार</li>
@@ -529,9 +529,9 @@
 
       <div class="plan-card featured">
         <div class="plan-badge">🔥 सबैभन्दा राम्रो मूल्य</div>
-        <p class="plan-name">🏆 वार्षिक | Annual</p>
+        <p class="plan-name">🏆 वार्षिक</p>
         <div class="plan-price">रू. ४,५००<span>/वर्ष</span></div>
-        <p style="font-size:12px; color:#2e7d32; margin-bottom:4px">Save रू. 1,500!</p>
+        <p style="font-size:12px; color:#2e7d32; margin-bottom:4px">रू. 1,500 बचत!</p>
         <ul class="plan-features">
           <li>✅ असीमित समाचार</li>
           <li>✅ प्रिमियम विश्लेषण</li>
@@ -545,10 +545,10 @@
 
     <!-- PAYMENT FORM -->
     <div class="payment-section" id="payment-section" style="display:none">
-      <h2>💳 भुक्तानी गर्नुहोस् | Payment</h2>
+      <h2>💳 भुक्तानी गर्नुहोस्</h2>
       <p id="selected-plan-info" style="background:#f8f9fa; padding:10px 14px; border-radius:6px; margin-bottom:20px; font-size:14px; color:#495057;"></p>
 
-      <p style="font-size:14px; font-weight:600; margin-bottom:10px; color:#1a2744;">भुक्तानी विधि छान्नुहोस् | Choose Payment Method</p>
+      <p style="font-size:14px; font-weight:600; margin-bottom:10px; color:#1a2744;">भुक्तानी विधि छान्नुहोस्</p>
       <div class="payment-methods">
         <button class="pay-btn" onclick="selectPayment('esewa')">
           <span class="pay-icon esewa-color">💚</span>eSewa
@@ -602,12 +602,12 @@
       <!-- BANK FORM -->
       <div id="bank-form" style="display:none">
         <div style="background:#fff3e0; border: 1px solid #ffe0b2; border-radius:8px; padding:16px; margin-bottom:16px;">
-          <p style="font-size:14px; font-weight:600; color:#e65100;">बैंक विवरण | Bank Details</p>
+          <p style="font-size:14px; font-weight:600; color:#e65100;">बैंक विवरण</p>
           <p style="font-size:13px; color:#495057; margin-top:8px;">बैंक: Nepal Investment Bank<br/>खाता नाम: Nepal Samachar Pvt. Ltd.<br/>खाता नम्बर: 012345678901234<br/>Branch: Kathmandu, Newroad</p>
         </div>
-        <div class="form-group"><label>तपाईंको नाम | Your Name</label><input type="text" placeholder="राम बहादुर श्रेष्ठ" /></div>
-        <div class="form-group"><label>रसिद नम्बर | Receipt No.</label><input type="text" placeholder="TXN123456" /></div>
-        <button class="btn-pay" onclick="processPayment('Bank Transfer')">🏦 पुष्टि गर्नुहोस् | Confirm</button>
+        <div class="form-group"><label>तपाईंको नाम</label><input type="text" placeholder="राम बहादुर श्रेष्ठ" /></div>
+        <div class="form-group"><label>रसिद नम्बर</label><input type="text" placeholder="TXN123456" /></div>
+        <button class="btn-pay" onclick="processPayment('Bank Transfer')">🏦 पुष्टि गर्नुहोस्</button>
       </div>
 
       <!-- CARD FORM -->
@@ -621,7 +621,7 @@
         <button class="btn-pay" onclick="processPayment('Card')">💳 Pay Now</button>
       </div>
 
-      <p class="secure-note">🔒 तपाईंको भुक्तानी सुरक्षित र एन्क्रिप्टेड छ | Your payment is secure and encrypted</p>
+      <p class="secure-note">🔒 तपाईंको भुक्तानी सुरक्षित र एन्क्रिप्टेड छ</p>
     </div>
   </main>
 
@@ -629,7 +629,7 @@
   <div class="success-overlay" id="success-overlay">
     <div class="success-box">
       <div class="icon">🎉</div>
-      <h2>बधाई छ! Congratulations!</h2>
+      <h2>बधाई छ!</h2>
       <p>तपाईंको Premium सदस्यता सफलतापूर्वक सक्रिय भयो। अब सबै प्रिमियम सामग्री उपलब्ध छ।</p>
       <a href="index.html">गृहपृष्ठमा जानुहोस् →</a>
     </div>
@@ -685,7 +685,8 @@
         minute: '2-digit',
         timeZone: 'Asia/Kathmandu'
       };
-      document.getElementById('datetime').textContent = now.toLocaleDateString('ne-NP', options);
+      const el = document.getElementById('datetime');
+      if (el) el.textContent = now.toLocaleDateString('ne-NP', options);
     }
     updateDateTime();
     setInterval(updateDateTime, 60000);
@@ -702,12 +703,13 @@
     function selectPlan(plan, amount) {
       selectedPlan = plan;
       selectedAmount = amount;
-      document.getElementById('payment-section').style.display = 'block';
+      const section = document.getElementById('payment-section');
+      section.style.display = 'block';
       document.getElementById('selected-plan-info').textContent =
         plan === 'monthly'
           ? '📰 मासिक योजना — रू. 500/महिना'
           : '🏆 वार्षिक योजना — रू. 4,500/वर्ष (रू. 1,500 बचत!)';
-      document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth' });
+      section.scrollIntoView({ behavior: 'smooth' });
     }
 
     function selectPayment(method) {
@@ -736,6 +738,25 @@
         this.value = v.replace(/(.{4})/g, '$1 ').trim();
       });
     }
+
+    // ===== NAVIGATION ACTIVE STATE =====
+    // This ensures only the current page's link stays active
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      const navLinks = document.querySelectorAll('.main-nav a');
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage) {
+          link.classList.add('active');
+          // If it's the subscribe link, also add the nav-subscribe active class
+          if (link.classList.contains('nav-subscribe')) {
+            link.classList.add('active');
+          }
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    });
   </script>
 </body>
 </html>
