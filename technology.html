@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>प्रविधि | Technology — Nepal Samachar</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --tech: #6c3fc5; --tech-dark: #5230a3; --tech-light: #f5f0ff;
+      --bg: #f5f5f5; --white: #fff; --text: #1a1a1a; --muted: #666; --border: #e0e0e0;
+      --red: #c0392b;
+    }
+    body { font-family: 'Inter', 'Noto Sans Devanagari', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; }
+    a { text-decoration: none; color: inherit; }
+    img { width: 100%; display: block; object-fit: cover; }
+    .topbar { background: var(--text); color: #ccc; font-size: 12px; padding: 6px 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .topbar-inner { display: flex; justify-content: space-between; align-items: center; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .topbar-right a { color: #ccc; }
+    .btn-login { background: var(--red); color: #fff !important; padding: 3px 12px; border-radius: 3px; font-size: 11px; }
+    .header { background: var(--white); border-bottom: 3px solid var(--tech); box-shadow: 0 2px 6px rgba(0,0,0,.07); position: sticky; top: 0; z-index: 100; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
+    .logo a { display: flex; align-items: center; }
+    .logo-img { height: 50px; width: auto; object-fit: contain; display: block; }
+    .main-nav { display: flex; align-items: center; gap: 4px; }
+    .main-nav a { padding: 7px 12px; border-radius: 4px; font-size: 14px; font-weight: 500; color: var(--text); transition: background .2s, color .2s; }
+    .main-nav a:hover, .main-nav a.active { background: var(--red); color: #fff; }
+    .nav-subscribe { background: var(--red) !important; color: #fff !important; }
+    .hamburger { display: none; background: none; border: none; font-size: 22px; cursor: pointer; }
+    .breaking { background: #222; color: #fff; padding: 7px 0; overflow: hidden; }
+    .breaking-inner { display: flex; align-items: center; gap: 12px; }
+    .breaking-label { background: var(--red); color: #fff; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 2px; white-space: nowrap; text-transform: uppercase; }
+    .ticker-wrap { overflow: hidden; flex: 1; }
+    .ticker { white-space: nowrap; animation: ticker 30s linear infinite; font-size: 13px; }
+    @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+    .page-hero { background: linear-gradient(135deg, #1a0533 0%, var(--tech) 100%); color: #fff; padding: 32px 0 24px; }
+    .page-hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 6px; }
+    .page-hero p { opacity: .85; font-size: 14px; }
+    .breadcrumb { font-size: 12px; opacity: .7; margin-bottom: 10px; }
+    .breadcrumb a { color: #fff; opacity: .8; }
+
+    .filter-bar { background: var(--white); border-bottom: 1px solid var(--border); }
+    .filter-bar-inner { display: flex; overflow-x: auto; }
+    .filter-btn { padding: 14px 20px; font-size: 13px; font-weight: 500; border: none; background: none; cursor: pointer; border-bottom: 3px solid transparent; color: var(--muted); white-space: nowrap; transition: all .2s; }
+    .filter-btn:hover { color: var(--tech); }
+    .filter-btn.active { color: var(--tech); border-bottom-color: var(--tech); font-weight: 600; }
+
+    .main-layout { display: grid; grid-template-columns: 1fr 320px; gap: 28px; padding: 28px 20px; }
+    .content-main { min-width: 0; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--tech); }
+    .section-header h2 { font-size: 1.1rem; font-weight: 700; }
+    .section-header a { font-size: 13px; color: var(--tech); font-weight: 500; }
+
+    /* FEATURED */
+    .featured-article { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.07); margin-bottom: 28px; }
+    .featured-img-wrap { position: relative; }
+    .featured-img { height: 320px; object-fit: cover; }
+    .category-badge { position: absolute; top: 16px; left: 16px; background: var(--tech); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 3px; text-transform: uppercase; }
+    .featured-body { padding: 24px; }
+    .featured-title { font-size: 1.4rem; font-weight: 700; line-height: 1.4; margin-bottom: 6px; font-family: 'Noto Sans Devanagari', sans-serif; }
+    .featured-title-en { font-size: 1rem; color: var(--muted); margin-bottom: 12px; }
+    .featured-excerpt { color: #444; line-height: 1.7; margin-bottom: 16px; }
+    .article-meta { display: flex; gap: 16px; font-size: 12px; color: var(--muted); margin-bottom: 16px; flex-wrap: wrap; }
+    .btn-read-more { display: inline-block; background: var(--tech); color: #fff; padding: 9px 22px; border-radius: 5px; font-size: 13px; font-weight: 600; }
+    .btn-read-more:hover { background: var(--tech-dark); }
+
+    /* TECH GRID */
+    .tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 28px; }
+    .tech-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 5px rgba(0,0,0,.05); transition: box-shadow .2s, transform .2s; position: relative; }
+    .tech-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.1); transform: translateY(-2px); }
+    .tech-card img { height: 170px; object-fit: cover; }
+    .tech-card-body { padding: 14px; }
+    .tech-card-body h3 { font-size: .9rem; font-weight: 600; line-height: 1.5; margin: 8px 0 6px; font-family: 'Noto Sans Devanagari', sans-serif; }
+    .tech-card-body p { font-size: .82rem; color: #555; line-height: 1.6; margin-bottom: 10px; }
+    .article-meta.small { font-size: 11px; color: var(--muted); gap: 10px; margin-bottom: 8px; }
+    .tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 2px; text-transform: uppercase; color: #fff; }
+    .tag-tech { background: var(--tech); }
+    .tag-ai { background: #e74c3c; }
+    .tag-mobile { background: #27ae60; }
+    .tag-startup { background: #f39c12; }
+    .tag-cyber { background: #c0392b; }
+    .tag-digital { background: #2980b9; }
+    .read-link { font-size: 12px; color: var(--tech); font-weight: 600; }
+    .premium { border: 1.5px solid #f0c060; }
+    .premium-badge { position: absolute; top: 8px; right: 8px; background: #f0c060; color: #7a5a00; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 2px; }
+    .premium-lock { color: #b8860b; }
+
+    /* TECH STATS */
+    .tech-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+    .stat-card { background: var(--white); border-radius: 8px; padding: 16px; text-align: center; box-shadow: 0 1px 5px rgba(0,0,0,.05); border-top: 3px solid var(--tech); }
+    .stat-num { font-size: 1.6rem; font-weight: 700; color: var(--tech); display: block; }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    /* SIDEBAR */
+    .sidebar { min-width: 0; }
+    .sidebar-widget { background: var(--white); border-radius: 8px; padding: 18px; margin-bottom: 20px; box-shadow: 0 1px 5px rgba(0,0,0,.05); }
+    .sidebar-widget h3 { font-size: .95rem; font-weight: 700; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--tech); }
+    .search-box { display: flex; gap: 6px; }
+    .search-box input { flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; outline: none; }
+    .search-box button { background: var(--tech); color: #fff; border: none; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600; }
+    .trending-list { padding-left: 18px; }
+    .trending-list li { margin-bottom: 10px; }
+    .trending-list a { font-size: 13px; line-height: 1.5; color: var(--text); }
+    .trending-list a:hover { color: var(--tech); }
+    .newsletter-form { display: flex; flex-direction: column; gap: 8px; }
+    .newsletter-form input { padding: 9px 12px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; outline: none; }
+    .newsletter-form button { background: var(--tech); color: #fff; border: none; padding: 9px; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 13px; }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tech-tag { padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; font-size: 12px; color: var(--muted); cursor: pointer; transition: all .2s; }
+    .tech-tag:hover { border-color: var(--tech); color: var(--tech); background: var(--tech-light); }
+    .social-links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .social-btn { display: block; text-align: center; padding: 8px; border-radius: 4px; font-size: 12px; font-weight: 600; color: #fff; }
+    .fb { background: #1877f2; } .yt { background: #f00; } .tw { background: #000; } .wa { background: #25d366; }
+
+    .pagination { display: flex; gap: 6px; justify-content: center; margin: 28px 0; }
+    .page-btn { padding: 8px 14px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; cursor: pointer; background: var(--white); color: var(--text); transition: all .2s; }
+    .page-btn:hover, .page-btn.active { background: var(--tech); color: #fff; border-color: var(--tech); }
+
+    .footer { background: #1a1a1a; color: #aaa; padding: 40px 0 0; margin-top: 40px; }
+    .footer-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; padding-bottom: 28px; }
+    .footer-col h4 { color: #fff; font-size: .9rem; margin-bottom: 14px; }
+    .footer-col p { font-size: 13px; line-height: 1.8; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 6px; }
+    .footer-col ul li a { font-size: 13px; color: #aaa; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid #333; text-align: center; padding: 16px; font-size: 12px; }
+
+    @media (max-width: 900px) { .main-layout { grid-template-columns: 1fr; } .tech-stats { grid-template-columns: repeat(2,1fr); } .footer-inner { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 600px) { 
+      .tech-grid { grid-template-columns: 1fr; } 
+      .main-nav { display: none; } 
+      .hamburger { display: block; } 
+      .tech-stats { grid-template-columns: repeat(2,1fr); }
+      .logo-img { height: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span id="datetime"></span>
+      <div class="topbar-right">
+        <a href="#">नेपाली</a><span>|</span><a href="#">English</a>
+        <a href="login.html" class="btn-login">Login / लगइन</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html">
+          <img src="https://i.ibb.co/fGz4qtwn/dhamadhamkhabar.png" alt="धमाधम खबर" class="logo-img" />
+        </a>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html">गृहपृष्ठ</a>
+        <a href="news.html">समाचार</a>
+        <a href="blog.html">ब्लग</a>
+        <a href="politics.html">राजनीति</a>
+        <a href="technology.html" class="active">प्रविधि</a>
+        <a href="sports.html">खेलकुद</a>
+        <a href="subscribe.html" class="nav-subscribe">सदस्यता</a>
+      </nav>
+      <button class="hamburger">&#9776;</button>
+    </div>
+  </header>
+
+  <div class="breaking">
+    <div class="container breaking-inner">
+      <span class="breaking-label">Breaking</span>
+      <div class="ticker-wrap"><div class="ticker">&nbsp;&nbsp;&nbsp; 🔴 eSewa ले नयाँ AI फिचर लन्च गर्यो &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 🔴 नेपालमा 5G सेवा विस्तार हुँदै &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 🔴 Nepal Tech Summit 2081 घोषणा &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 🔴 Startup Nepal: नयाँ कोष स्थापना</div></div>
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">गृहपृष्ठ</a> › प्रविधि</div>
+      <h1>💻 प्रविधि | Technology</h1>
+      <p>नेपालको डिजिटल क्रान्ति — Nepal's tech landscape, startups & innovation</p>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="container filter-bar-inner">
+      <button class="filter-btn active">सबै | All</button>
+      <button class="filter-btn">AI / ML</button>
+      <button class="filter-btn">मोबाइल | Mobile</button>
+      <button class="filter-btn">Startup</button>
+      <button class="filter-btn">साइबर | Cyber</button>
+      <button class="filter-btn">डिजिटल | Digital</button>
+      <button class="filter-btn">समीक्षा | Review</button>
+    </div>
+  </div>
+
+  <main class="container main-layout">
+    <section class="content-main">
+
+      <!-- TECH STATS -->
+      <div class="tech-stats">
+        <div class="stat-card"><span class="stat-num">४.२M+</span><div class="stat-label">इन्टरनेट प्रयोगकर्ता</div></div>
+        <div class="stat-card"><span class="stat-num">१२०+</span><div class="stat-label">Tech Startups</div></div>
+        <div class="stat-card"><span class="stat-num">७८%</span><div class="stat-label">मोबाइल पहुँच</div></div>
+        <div class="stat-card"><span class="stat-num">₹२.१B</span><div class="stat-label">Digital Payment</div></div>
+      </div>
+
+      <!-- FEATURED -->
+      <article class="featured-article">
+        <div class="featured-img-wrap">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Technology" class="featured-img" />
+          <span class="category-badge">प्रविधि | Tech</span>
+        </div>
+        <div class="featured-body">
+          <h1 class="featured-title">नेपालमा डिजिटल भुक्तानी प्रणाली थप विस्तार: eSewa र Khalti मा नयाँ AI सुविधा</h1>
+          <p class="featured-title-en">Nepal's Digital Payment System Expands: eSewa and Khalti Add New AI Features</p>
+          <p class="featured-excerpt">eSewa र Khalti लगायत नेपालका प्रमुख डिजिटल वालेटहरूले कृत्रिम बुद्धिमत्ता (AI) आधारित नयाँ सुविधाहरू थपेका छन् जसले ग्राहकको अनुभव र सुरक्षालाई थप बलियो बनाउनेछ।</p>
+          <div class="article-meta">
+            <span>✎ प्रकाश थापा</span><span>📅 असार १५</span><span>⏱ ४ मिनेट</span>
+          </div>
+          <a href="article.html" class="btn-read-more">पूरा पढ्नुहोस् →</a>
+        </div>
+      </article>
+
+      <div class="section-header">
+        <h2>प्रविधि समाचार | Tech News</h2>
+        <span style="font-size:13px;color:var(--muted);">९३ समाचार</span>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=400&q=80" alt="AI" />
+          <div class="tech-card-body">
+            <span class="tag tag-ai">AI</span>
+            <h3>नेपाली भाषामा AI च्याटबोट: स्थानीय स्टार्टअपको नयाँ उद्यम</h3>
+            <p>काठमाडौंस्थित एक प्रविधि कम्पनीले नेपाली भाषामा काम गर्ने AI च्याटबोट तयार गरेको छ।</p>
+            <div class="article-meta small"><span>📅 असार १४</span><span>⏱ ३ मिनेट</span></div>
+            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+          </div>
+        </article>
+        <article class="tech-card premium">
+          <div class="premium-badge">🔒 Premium</div>
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="5G" />
+          <div class="tech-card-body">
+            <span class="tag tag-mobile">5G</span>
+            <h3>नेपालमा 5G नेटवर्क: कहाँ र कहिलेसम्म?</h3>
+            <p>नेपाल टेलिकम र NCell ले 5G सेवा विस्तारको लागि गर्दै आएको तयारीको विस्तृत विश्लेषण।</p>
+            <div class="article-meta small"><span>📅 असार १३</span><span>⏱ ५ मिनेट</span></div>
+            <a href="subscribe.html" class="read-link premium-lock">🔒 सदस्यता चाहिन्छ →</a>
+          </div>
+        </article>
+        <article class="tech-card">
+          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&q=80" alt="Startup" />
+          <div class="tech-card-body">
+            <span class="tag tag-startup">Startup</span>
+            <h3>नेपाली स्टार्टअपहरूले अन्तर्राष्ट्रिय लगानी आकर्षित गरे</h3>
+            <p>पछिल्लो त्रैमासिकमा नेपाली टेक स्टार्टअपहरूमा विदेशी लगानी उल्लेखनीय रूपमा बढेको छ।</p>
+            <div class="article-meta small"><span>📅 असार १२</span><span>⏱ ३ मिनेट</span></div>
+            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+          </div>
+        </article>
+        <article class="tech-card">
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80" alt="Cyber" />
+          <div class="tech-card-body">
+            <span class="tag tag-cyber">साइबर</span>
+            <h3>साइबर सुरक्षा: नेपालमा अनलाइन धोखाधडी बढ्दो</h3>
+            <p>पछिल्लो समय नेपालमा अनलाइन ठगीका घटनाहरू बढेका छन्, सचेत रहनु जरुरी छ।</p>
+            <div class="article-meta small"><span>📅 असार ११</span><span>⏱ ४ मिनेट</span></div>
+            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="pagination">
+        <button class="page-btn active">१</button>
+        <button class="page-btn">२</button>
+        <button class="page-btn">३</button>
+        <button class="page-btn">→</button>
+      </div>
+
+    </section>
+
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h3>🔍 खोज्नुहोस्</h3>
+        <div class="search-box"><input type="text" placeholder="प्रविधि खोज्नुहोस्..."/><button>खोज</button></div>
+      </div>
+      <div class="sidebar-widget">
+        <h3>🏷️ विषयहरू</h3>
+        <div class="tech-tags">
+          <span class="tech-tag">AI</span><span class="tech-tag">5G</span>
+          <span class="tech-tag">Startup</span><span class="tech-tag">eSewa</span>
+          <span class="tech-tag">Blockchain</span><span class="tech-tag">App</span>
+          <span class="tech-tag">Cyber</span><span class="tech-tag">Cloud</span>
+        </div>
+      </div>
+      <div class="sidebar-widget">
+        <h3>📈 ट्रेन्डिङ</h3>
+        <ol class="trending-list">
+          <li><a href="article.html">नेपालमा इन्टरनेट प्रयोगकर्ता बढे</a></li>
+          <li><a href="article.html">eSewa र Khalti को नयाँ सुविधा</a></li>
+          <li><a href="article.html">नेपाली AI स्टार्टअपको सफलता</a></li>
+          <li><a href="article.html">5G नेटवर्क विस्तार योजना</a></li>
+          <li><a href="article.html">साइबर अपराधबाट बच्ने तरिका</a></li>
+        </ol>
+      </div>
+      <div class="sidebar-widget">
+        <h3>📧 Newsletter</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">टेक अपडेट पाउनुहोस्।</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="your@email.com" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-col"><h4>नेपाल समाचार</h4><p>नेपालको विश्वसनीय समाचार स्रोत।</p></div>
+      <div class="footer-col"><h4>विभाग | Sections</h4><ul><li><a href="news.html">समाचार</a></li><li><a href="blog.html">ब्लग</a></li><li><a href="politics.html">राजनीति</a></li><li><a href="technology.html">प्रविधि</a></li><li><a href="sports.html">खेलकुद</a></li></ul></div>
+      <div class="footer-col"><h4>जानकारी</h4><ul><li><a href="about.html">हाम्रो बारे</a></li><li><a href="contact.html">सम्पर्क</a></li><li><a href="privacy.html">गोपनीयता नीति</a></li></ul></div>
+      <div class="footer-col"><h4>सम्पर्क</h4><p>📍 काठमाडौं, नेपाल</p><p>📧 info@nepalsamachar.com</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2081 नेपाल समाचार | Nepal Samachar. सर्वाधिकार सुरक्षित।</p></div>
+  </footer>
+
+  <script>
+    function updateTime() {
+      const el = document.getElementById('datetime');
+      if (el) el.textContent = new Date().toLocaleString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+    }
+    updateTime(); setInterval(updateTime, 60000);
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
