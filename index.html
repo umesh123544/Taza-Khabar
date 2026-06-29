@@ -3,15 +3,849 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> धमाधम खबर|Nepal News & Blog</title>
+  <title>धमाधम खबर | Nepal News & Blog</title>
   <meta name="description" content="Nepal's trusted source for news and blog content in Nepali and English." />
-  <link rel="stylesheet" href="style.css" />
+  
+  <!-- ====== FAVICON ====== -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
+  
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Serif+Devanagari:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== TOP BAR ===== */
+    .topbar {
+      background: #0f172a;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      padding: 8px 0;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .topbar-right a {
+      color: #94a3b8;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .topbar-right a:hover {
+      color: #ffffff;
+    }
+
+    .btn-login {
+      background: #2563eb;
+      color: #fff !important;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-weight: 500;
+      font-size: 0.8rem;
+      transition: background 0.2s;
+    }
+
+    .btn-login:hover {
+      background: #1d4ed8 !important;
+      color: #fff !important;
+    }
+
+    #datetime {
+      font-weight: 400;
+      color: #94a3b8;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 8px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo a {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .main-nav a {
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #334155;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .main-nav a:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    .main-nav a.active {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .nav-subscribe {
+      background: #0f172a;
+      color: #fff !important;
+      padding: 6px 18px !important;
+      border-radius: 20px !important;
+      font-weight: 600;
+    }
+
+    .nav-subscribe:hover {
+      background: #1e293b !important;
+      color: #fff !important;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #0f172a;
+      padding: 4px 8px;
+    }
+
+    /* ===== BREAKING TICKER ===== */
+    .breaking {
+      background: #0f172a;
+      color: #fff;
+      padding: 8px 0;
+      border-bottom: 2px solid #2563eb;
+    }
+
+    .breaking-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .breaking-label {
+      background: #dc2626;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 2px 12px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .ticker-wrap {
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .ticker {
+      display: inline-block;
+      white-space: nowrap;
+      animation: ticker-scroll 25s linear infinite;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+    }
+
+    @keyframes ticker-scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 32px;
+      padding: 32px 20px;
+    }
+
+    /* ===== FEATURED ARTICLE ===== */
+    .featured-article {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      margin-bottom: 32px;
+    }
+
+    .featured-img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .category-badge {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background: #2563eb;
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .featured-body {
+      padding: 28px 30px 30px;
+    }
+
+    .featured-title {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .featured-title-en {
+      font-size: 0.95rem;
+      color: #64748b;
+      margin-bottom: 14px;
+    }
+
+    .featured-excerpt {
+      color: #334155;
+      font-size: 1.05rem;
+      margin-bottom: 16px;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #64748b;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .article-meta.small {
+      font-size: 0.8rem;
+      gap: 12px;
+    }
+
+    .btn-read-more {
+      display: inline-block;
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+
+    .btn-read-more:hover {
+      background: #1e293b;
+    }
+
+    /* ===== SECTION HEADER ===== */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 32px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .section-header h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .section-header a {
+      color: #2563eb;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .section-header a:hover {
+      color: #1d4ed8;
+    }
+
+    /* ===== NEWS GRID ===== */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .news-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .news-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .news-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .news-card-body {
+      padding: 16px 18px 18px;
+    }
+
+    .news-card-body h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 8px 0 6px;
+      line-height: 1.3;
+    }
+
+    .news-card-body p {
+      color: #475569;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 12px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .tag-tech { background: #dbeafe; color: #1d4ed8; }
+    .tag-economy { background: #d1fae5; color: #065f46; }
+    .tag-sports { background: #fce7f3; color: #9d174d; }
+    .tag-tourism { background: #fef3c7; color: #92400e; }
+    .tag-health { background: #fce4ec; color: #b71c1c; }
+    .tag-local { background: #e0f2fe; color: #0369a1; }
+    .tag-blog { background: #f3e8ff; color: #6b21a8; }
+
+    .read-link {
+      display: inline-block;
+      color: #2563eb;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 4px;
+      transition: color 0.2s;
+    }
+
+    .read-link:hover {
+      color: #1d4ed8;
+    }
+
+    .premium {
+      border: 2px solid #fcd34d;
+      position: relative;
+    }
+
+    .premium-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #fcd34d;
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 0.7rem;
+      padding: 2px 12px;
+      border-radius: 12px;
+      z-index: 2;
+    }
+
+    .premium-lock {
+      color: #f59e0b !important;
+    }
+
+    /* ===== BLOG LIST ===== */
+    .blog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .blog-item {
+      display: flex;
+      gap: 18px;
+      background: #fff;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      transition: box-shadow 0.2s;
+    }
+
+    .blog-item:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+
+    .blog-item img {
+      width: 150px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .blog-body {
+      flex: 1;
+    }
+
+    .blog-body h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 4px 0 6px;
+    }
+
+    .blog-body p {
+      color: #475569;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .sidebar-widget {
+      background: #ffffff;
+      padding: 20px 22px;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .sidebar-widget h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 8px;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 8px 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: #2563eb;
+    }
+
+    .search-box button {
+      padding: 8px 18px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .search-box button:hover {
+      background: #1d4ed8;
+    }
+
+    /* Subscribe Widget */
+    .subscribe-widget {
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    .subscribe-widget h3 {
+      color: #fff;
+      border-bottom-color: #1e293b;
+    }
+
+    .subscribe-features {
+      list-style: none;
+      margin: 12px 0 16px;
+    }
+
+    .subscribe-features li {
+      padding: 4px 0;
+      font-size: 0.9rem;
+    }
+
+    .price-options {
+      display: flex;
+      gap: 12px;
+      margin: 12px 0 16px;
+    }
+
+    .price-option {
+      flex: 1;
+      background: #1e293b;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .price-option.featured {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .price-option span {
+      display: block;
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .price-option strong {
+      font-size: 1.1rem;
+    }
+
+    .btn-subscribe {
+      display: block;
+      text-align: center;
+      background: #fcd34d;
+      color: #0f172a;
+      font-weight: 700;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .btn-subscribe:hover {
+      background: #fbbf24;
+    }
+
+    /* Trending */
+    .trending-list {
+      list-style: none;
+      counter-reset: trending;
+    }
+
+    .trending-list li {
+      counter-increment: trending;
+      padding: 6px 0 6px 28px;
+      position: relative;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .trending-list li::before {
+      content: counter(trending);
+      position: absolute;
+      left: 0;
+      top: 6px;
+      font-weight: 700;
+      color: #2563eb;
+      font-size: 0.9rem;
+    }
+
+    .trending-list li a {
+      color: #0f172a;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .trending-list li a:hover {
+      color: #2563eb;
+    }
+
+    /* Newsletter */
+    .newsletter-form {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 8px 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .newsletter-form input:focus {
+      border-color: #2563eb;
+    }
+
+    .newsletter-form button {
+      padding: 8px 18px;
+      background: #0f172a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .newsletter-form button:hover {
+      background: #1e293b;
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .social-btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fff;
+      transition: opacity 0.2s;
+    }
+
+    .social-btn:hover {
+      opacity: 0.8;
+    }
+
+    .social-btn.fb { background: #1877f2; }
+    .social-btn.yt { background: #ff0000; }
+    .social-btn.tw { background: #000000; }
+    .social-btn.wa { background: #25d366; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0f172a;
+      color: #94a3b8;
+      margin-top: 40px;
+      padding: 40px 0 0;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .footer-col p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      padding: 4px 0;
+    }
+
+    .footer-col ul li a {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 16px 0;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .main-nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 16px 0;
+        gap: 4px;
+        border-top: 1px solid #e2e8f0;
+        margin-top: 12px;
+      }
+
+      .main-nav.open {
+        display: flex;
+      }
+
+      .main-nav a {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+      }
+
+      .header-inner {
+        flex-wrap: wrap;
+      }
+
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .featured-img {
+        height: 220px;
+      }
+
+      .featured-body {
+        padding: 20px;
+      }
+
+      .featured-title {
+        font-size: 1.4rem;
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-item {
+        flex-direction: column;
+      }
+
+      .blog-item img {
+        width: 100%;
+        height: 160px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .price-options {
+        flex-direction: column;
+      }
+
+      .search-box,
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .logo-img {
+        height: 50px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .logo-img {
+        height: 45px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -20,9 +854,9 @@
     <div class="container topbar-inner">
       <span id="datetime"></span>
       <div class="topbar-right">
-        <a href="#" onclick="setLang('ne')">नेपाली</a>
+        <a href="#" onclick="setLang('ne')" id="lang-ne">नेपाली</a>
         <span>|</span>
-        <a href="#" onclick="setLang('en')">English</a>
+        <a href="#" onclick="setLang('en')" id="lang-en">English</a>
         <a href="login.html" class="btn-login">Login / लगइन</a>
       </div>
     </div>
@@ -33,8 +867,7 @@
     <div class="container header-inner">
       <div class="logo">
         <a href="index.html">
-          <span class="logo-ne">धमाधम खबर</span>
-          <span class="logo-en">Nepal Samachar</span>
+          <img src="dhamadhamkhabar.png" alt="धमाधम खबर" class="logo-img" />
         </a>
       </div>
       <nav class="main-nav" id="main-nav">
@@ -333,6 +1166,115 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Google Translate Element -->
+  <div id="google_translate_element" style="display:none;"></div>
+
+  <script>
+    // ===== DATETIME =====
+    function updateDateTime() {
+      const now = new Date();
+      const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Asia/Kathmandu'
+      };
+      document.getElementById('datetime').textContent = now.toLocaleDateString('ne-NP', options);
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 60000);
+
+    // ===== HAMBURGER MENU =====
+    document.getElementById('hamburger').addEventListener('click', function() {
+      document.getElementById('main-nav').classList.toggle('open');
+    });
+
+    // ===== SEARCH =====
+    function doSearch() {
+      const query = document.getElementById('search-input').value.trim();
+      if (query) {
+        alert('खोज परिणाम: "' + query + '" को लागि केही फेला परेन। (Search demo)');
+      } else {
+        alert('कृपया केही खोज्नुहोस्।');
+      }
+    }
+
+    document.getElementById('search-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') doSearch();
+    });
+
+    // ===== NEWSLETTER =====
+    function subscribeNewsletter(e) {
+      e.preventDefault();
+      const msg = document.getElementById('newsletter-msg');
+      msg.style.display = 'block';
+      setTimeout(() => { msg.style.display = 'none'; }, 3000);
+      e.target.reset();
+    }
+
+    // ===== GOOGLE TRANSLATE =====
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'ne',
+        includedLanguages: 'en,ne',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+
+    function loadGoogleTranslate() {
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      document.body.appendChild(script);
+    }
+
+    function translatePageToEnglish() {
+      document.cookie = "googtrans=/ne/en; path=/";
+      location.reload();
+    }
+
+    function translatePageToNepali() {
+      document.cookie = "googtrans=/en/ne; path=/";
+      location.reload();
+    }
+
+    function setLang(lang) {
+      if (lang === 'en') {
+        translatePageToEnglish();
+      } else {
+        translatePageToNepali();
+      }
+    }
+
+    // ===== ON PAGE LOAD =====
+    window.onload = function() {
+      var cookies = document.cookie.split(';');
+      var lang = 'ne';
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.startsWith('googtrans=')) {
+          if (cookie.includes('/en')) {
+            lang = 'en';
+          }
+        }
+      }
+      
+      if (lang === 'en') {
+        loadGoogleTranslate();
+        document.getElementById('lang-en').style.fontWeight = 'bold';
+        document.getElementById('lang-en').style.color = '#2563eb';
+        document.getElementById('lang-ne').style.fontWeight = 'normal';
+        document.getElementById('lang-ne').style.color = '#94a3b8';
+      } else {
+        document.getElementById('lang-ne').style.fontWeight = 'bold';
+        document.getElementById('lang-ne').style.color = '#2563eb';
+        document.getElementById('lang-en').style.fontWeight = 'normal';
+        document.getElementById('lang-en').style.color = '#94a3b8';
+      }
+    };
+  </script>
 </body>
 </html>
