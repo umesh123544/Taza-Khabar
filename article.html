@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>समाचार | नेपाल समाचार</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Serif+Devanagari:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    .article-page { padding: 24px 0 48px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 300px; gap: 32px; }
+    .article-main { background: white; border-radius: 12px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .article-main .category-badge { display: inline-block; background: #c0392b; color: white; font-size: 12px; padding: 4px 12px; border-radius: 4px; margin-bottom: 16px; font-family: var(--font-en); }
+    .article-main h1 { font-family: 'Noto Serif Devanagari', serif; font-size: 26px; font-weight: 700; color: #1a2744; line-height: 1.4; margin-bottom: 8px; }
+    .article-subtitle { font-family: var(--font-en); font-size: 14px; color: #6c757d; font-style: italic; margin-bottom: 16px; }
+    .article-meta-bar { display: flex; gap: 20px; flex-wrap: wrap; padding: 12px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin-bottom: 20px; font-size: 13px; color: #6c757d; font-family: var(--font-en); }
+    .share-bar { display: flex; gap: 8px; margin-bottom: 20px; }
+    .share-btn { padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; color: white; font-family: var(--font-en); }
+    .share-fb { background: #1877f2; }
+    .share-tw { background: #000; }
+    .share-wa { background: #25d366; }
+    .share-cp { background: #6c757d; }
+    .article-featured-img { width: 100%; border-radius: 8px; margin-bottom: 8px; max-height: 420px; object-fit: cover; }
+    .img-caption { font-size: 12px; color: #6c757d; text-align: center; margin-bottom: 20px; font-family: var(--font-en); font-style: italic; }
+    .article-body { font-size: 16px; line-height: 1.9; color: #2c2c2c; }
+    .article-body p { margin-bottom: 18px; }
+    .article-body h2 { font-family: 'Noto Serif Devanagari', serif; font-size: 20px; color: #1a2744; margin: 28px 0 12px; }
+    .article-body blockquote { border-left: 4px solid #c0392b; margin: 20px 0; padding: 12px 20px; background: #fdf2f2; border-radius: 0 8px 8px 0; font-style: italic; color: #555; }
+    .tags-section { margin-top: 24px; padding-top: 16px; border-top: 1px solid #eee; }
+    .tags-section span { font-size: 13px; color: #6c757d; font-family: var(--font-en); }
+    .tag-item { display: inline-block; background: #f0f0f0; padding: 4px 10px; border-radius: 20px; font-size: 12px; margin: 4px 2px; color: #495057; font-family: var(--font-en); }
+    .comments-section { margin-top: 32px; padding-top: 24px; border-top: 2px solid #eee; }
+    .comments-section h3 { font-size: 18px; color: #1a2744; margin-bottom: 16px; }
+    .comment-form { background: #f8f9fa; border-radius: 8px; padding: 16px; margin-bottom: 24px; }
+    .comment-form input, .comment-form textarea { width: 100%; padding: 10px 14px; border: 1px solid #dee2e6; border-radius: 6px; font-family: var(--font-ne); font-size: 14px; margin-bottom: 10px; }
+    .comment-form textarea { height: 100px; resize: vertical; }
+    .comment-form button { background: #c0392b; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 14px; font-family: var(--font-ne); }
+    .comment-item { padding: 14px 0; border-bottom: 1px solid #eee; }
+    .comment-author { font-weight: 700; font-size: 14px; color: #1a2744; }
+    .comment-date { font-size: 12px; color: #6c757d; font-family: var(--font-en); margin-left: 8px; }
+    .comment-text { font-size: 14px; color: #495057; margin-top: 6px; line-height: 1.6; }
+    @media (max-width: 860px) { .article-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span id="datetime"></span>
+      <div class="topbar-right">
+        <a href="index.html">← गृहपृष्ठ</a>
+        <a href="login.html" class="btn-login">Login</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo"><a href="index.html"><span class="logo-ne">नेपाल समाचार</span><span class="logo-en">Nepal Samachar</span></a></div>
+      <nav class="main-nav">
+        <a href="index.html">गृहपृष्ठ</a>
+        <a href="news.html">समाचार</a>
+        <a href="blog.html">ब्लग</a>
+        <a href="subscribe.html" class="nav-subscribe">सदस्यता</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div style="background: #f8f9fa; padding: 8px 0; border-bottom: 1px solid #eee;">
+    <div class="container" style="font-size:13px; color:#6c757d; font-family:var(--font-en);">
+      <a href="index.html" style="color:#c0392b;">Home</a> › <a href="news.html" style="color:#c0392b;">News</a> › <span>राजनीति</span>
+    </div>
+  </div>
+
+  <main class="container article-page">
+    <div class="article-layout">
+      <article class="article-main">
+        <span class="category-badge">राजनीति | Politics</span>
+        <h1>नेपाल सरकारले आगामी आर्थिक वर्षको बजेट घोषणा गर्यो — नयाँ विकास योजनाहरू सार्वजनिक</h1>
+        <p class="article-subtitle">Nepal Government Announces Budget for Upcoming Fiscal Year — New Development Plans Revealed</p>
+
+        <div class="article-meta-bar">
+          <span>✍️ रमेश श्रेष्ठ</span>
+          <span>📅 असार १५, २०८१</span>
+          <span>⏱ ५ मिनेट पढ्नुहोस्</span>
+          <span>👁 १२,४५६ Views</span>
+        </div>
+
+        <div class="share-bar">
+          <button class="share-btn share-fb" onclick="shareArticle('facebook')">Facebook</button>
+          <button class="share-btn share-tw" onclick="shareArticle('twitter')">Twitter</button>
+          <button class="share-btn share-wa" onclick="shareArticle('whatsapp')">WhatsApp</button>
+          <button class="share-btn share-cp" onclick="copyLink()">🔗 Copy Link</button>
+        </div>
+
+        <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=800&q=80" alt="Budget Announcement" class="article-featured-img" />
+        <p class="img-caption">सरकारले संसदमा बजेट प्रस्तुत गर्दै | Government presenting budget in Parliament — Photo: Government of Nepal</p>
+
+        <div class="article-body">
+          <p>काठमाडौं, असार १५ — नेपाल सरकारले आज आगामी आर्थिक वर्ष २०८१/८२ को बजेट घोषणा गर्यो। वित्त मन्त्री डा. प्रकाश श्रेष्ठले संघीय संसदमा प्रस्तुत गरेको बजेटमा शिक्षा, स्वास्थ्य र पूर्वाधार विकासलाई उच्च प्राथमिकता दिइएको छ।</p>
+
+          <p>यस पटकको कुल बजेट रकम रू. १७ खर्ब ५१ अर्ब रहेको छ जुन गत वर्षको तुलनामा ८.५ प्रतिशत बढी हो। सरकारले यस बजेटमार्फत देशका सबै प्रदेशमा समान विकास गर्ने लक्ष्य राखेको छ।</p>
+
+          <h2>मुख्य बुँदाहरू | Key Highlights</h2>
+
+          <p>शिक्षा क्षेत्रमा कुल बजेटको १२.५ प्रतिशत विनियोजन गरिएको छ। यसअन्तर्गत देशभरका सरकारी विद्यालयहरूमा डिजिटल पूर्वाधार स्थापना गर्ने, शिक्षकहरूको तलब वृद्धि गर्ने र छात्रवृत्तिको संख्या बढाउने योजना रहेको छ।</p>
+
+          <blockquote>
+            "यो बजेटले नेपालको आर्थिक रूपान्तरणमा महत्वपूर्ण भूमिका खेल्नेछ। हामी सबै नागरिकको जीवनस्तरमा सुधार ल्याउने प्रतिबद्ध छौं।" — वित्त मन्त्री डा. प्रकाश श्रेष्ठ
+          </blockquote>
+
+          <p>स्वास्थ्य क्षेत्रमा पनि ठूलो लगानी गर्ने योजना छ। काठमाडौं, पोखरा र भरतपुरमा नयाँ अस्पताल निर्माण गरिनेछ भने जिल्ला अस्पतालहरूको स्तरोन्नति गर्न पनि रकम छुट्याइएको छ। स्वास्थ्य बीमा कार्यक्रमलाई अझ व्यापक बनाउने लक्ष्य राखिएको छ।</p>
+
+          <h2>पूर्वाधार विकास | Infrastructure Development</h2>
+
+          <p>यातायात र ऊर्जा क्षेत्रमा ठूलो रकम विनियोजन गरिएको छ। तराई-मधेस द्रुतमार्ग, काठमाडौं-निजगढ द्रुतमार्ग र थप जलविद्युत् आयोजनाहरूका लागि बजेट छुट्याइएको छ। यसबाट हजारौं नागरिकलाई रोजगारी मिल्ने अपेक्षा गरिएको छ।</p>
+
+          <p>कृषि क्षेत्रमा पनि विशेष ध्यान दिइएको छ। किसानहरूलाई अनुदानमा मल र बीउ उपलब्ध गराउने, सिंचाइ सुविधा विस्तार गर्ने र कृषि बजार विकास गर्ने कार्यक्रमहरू समावेश छन्।</p>
+
+          <p>विपक्षी दलहरूले यस बजेटको आलोचना गर्दै यसले सामान्य नागरिकको समस्या समाधान गर्न नसक्ने बताएका छन्। तर सत्तारूढ दलले बजेटलाई ऐतिहासिक र प्रगतिशील भनेको छ।</p>
+        </div>
+
+        <div class="tags-section">
+          <span>Tags: </span>
+          <span class="tag-item">बजेट</span>
+          <span class="tag-item">सरकार</span>
+          <span class="tag-item">अर्थतन्त्र</span>
+          <span class="tag-item">Budget 2081</span>
+          <span class="tag-item">Nepal Government</span>
+        </div>
+
+        <!-- COMMENTS -->
+        <div class="comments-section">
+          <h3>💬 टिप्पणीहरू | Comments (<span id="comment-count">3</span>)</h3>
+
+          <div class="comment-form">
+            <h4 style="margin-bottom:12px; font-size:15px; color:#1a2744;">आफ्नो विचार राख्नुहोस्</h4>
+            <input type="text" id="comment-name" placeholder="तपाईंको नाम | Your Name" />
+            <textarea id="comment-text" placeholder="आफ्नो टिप्पणी यहाँ लेख्नुहोस्..."></textarea>
+            <button onclick="addComment()">टिप्पणी पठाउनुहोस् | Submit</button>
+          </div>
+
+          <div id="comments-list">
+            <div class="comment-item">
+              <span class="comment-author">सुनिता तामाङ</span>
+              <span class="comment-date">असार १५, २०८१</span>
+              <p class="comment-text">राम्रो समाचार! सरकारले शिक्षामा बढी ध्यान दिनु पर्छ। यो बजेट सकारात्मक देखिन्छ।</p>
+            </div>
+            <div class="comment-item">
+              <span class="comment-author">Ramesh K.</span>
+              <span class="comment-date">July 1, 2024</span>
+              <p class="comment-text">Good budget announcement. Hope the implementation will be effective this time.</p>
+            </div>
+            <div class="comment-item">
+              <span class="comment-author">बिकास राई</span>
+              <span class="comment-date">असार १५, २०८१</span>
+              <p class="comment-text">बजेट राम्रो छ तर कार्यान्वयन नभए के काम? सरकारले वाचा पूरा गर्नु पर्छ।</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-widget subscribe-widget">
+          <h3>⭐ Premium पढ्नुहोस्</h3>
+          <p>प्रिमियम सामग्री र गहन विश्लेषण पढ्न सदस्यता लिनुहोस्।</p>
+          <a href="subscribe.html" class="btn-subscribe">सदस्यता लिनुहोस्</a>
+        </div>
+        <div class="sidebar-widget">
+          <h3>📰 सम्बन्धित समाचार</h3>
+          <ol class="trending-list">
+            <li><a href="#">नेपालको GDP यस वर्ष ४.५% ले बढ्यो</a></li>
+            <li><a href="#">विदेशी लगानी नेपालमा बढ्दो</a></li>
+            <li><a href="#">राष्ट्र बैंकले ब्याजदर घटायो</a></li>
+            <li><a href="#">निजी क्षेत्रको माग: कर घटाउनु पर्छ</a></li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-bottom"><p>&copy; 2081 नेपाल समाचार | Nepal Samachar</p></div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function addComment() {
+      const name = document.getElementById('comment-name').value.trim();
+      const text = document.getElementById('comment-text').value.trim();
+      if (!name || !text) { alert('कृपया नाम र टिप्पणी दिनुहोस्।'); return; }
+      const list = document.getElementById('comments-list');
+      const now = new Date().toLocaleDateString('ne-NP');
+      const div = document.createElement('div');
+      div.className = 'comment-item';
+      div.innerHTML = `<span class="comment-author">${name}</span><span class="comment-date">${now}</span><p class="comment-text">${text}</p>`;
+      list.prepend(div);
+      document.getElementById('comment-name').value = '';
+      document.getElementById('comment-text').value = '';
+      const cnt = document.getElementById('comment-count');
+      cnt.textContent = parseInt(cnt.textContent) + 1;
+    }
+
+    function shareArticle(platform) {
+      const url = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent('नेपाल सरकारले बजेट घोषणा गर्यो | Nepal Samachar');
+      const urls = {
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+        twitter: `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
+        whatsapp: `https://wa.me/?text=${title}%20${url}`
+      };
+      window.open(urls[platform], '_blank', 'width=600,height=400');
+    }
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => alert('✅ लिंक कपी भयो!'));
+    }
+  </script>
+</body>
+</html>
