@@ -129,7 +129,6 @@
       background: var(--red);
       color: #fff;
     }
-    /* REMOVED nav-subscribe SPECIAL STYLES - NOW NORMAL LIKE OTHER LINKS */
     .hamburger {
       display: none;
       font-size: 1.8rem;
@@ -682,30 +681,20 @@
       document.getElementById('main-nav').classList.toggle('open');
     });
 
-    // ===== SET ACTIVE NAV LINK =====
+    // ===== SET ACTIVE NAV LINK - FIXED =====
     document.addEventListener('DOMContentLoaded', function() {
-      // Get current page filename
-      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-      
-      // Remove active from all nav links
+      // First, remove active from ALL links
       document.querySelectorAll('.main-nav a').forEach(link => {
         link.classList.remove('active');
       });
       
-      // Set active on the current page link
-      document.querySelectorAll('.main-nav a').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === currentPage) {
-          link.classList.add('active');
-        }
-      });
-      
-      // If we're on subscribe page, make sure subscribe link is highlighted
-      if (currentPage === 'subscribe.html') {
-        const subscribeLink = document.getElementById('nav-subscribe');
-        if (subscribeLink) {
-          subscribeLink.classList.add('active');
-        }
+      // Then, add active to subscribe link ONLY
+      const subscribeLink = document.getElementById('nav-subscribe');
+      if (subscribeLink) {
+        subscribeLink.classList.add('active');
+        console.log('Subscribe link activated!');
+      } else {
+        console.log('Subscribe link not found!');
       }
     });
 
