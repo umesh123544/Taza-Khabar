@@ -696,6 +696,37 @@
       document.getElementById('main-nav').classList.toggle('open');
     });
 
+    // ===== SET ACTIVE NAV LINK BASED ON CURRENT PAGE =====
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get current page filename
+      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      
+      // Remove active from all nav links
+      document.querySelectorAll('.main-nav a').forEach(link => {
+        link.classList.remove('active');
+        // Also remove active from nav-subscribe if it has it
+        if (link.classList.contains('nav-subscribe')) {
+          link.classList.remove('active');
+        }
+      });
+      
+      // Set active on the current page link
+      document.querySelectorAll('.main-nav a').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage) {
+          link.classList.add('active');
+        }
+      });
+      
+      // If we're on subscribe page, make sure subscribe link is highlighted
+      if (currentPage === 'subscribe.html') {
+        const subscribeLink = document.getElementById('nav-subscribe');
+        if (subscribeLink) {
+          subscribeLink.classList.add('active');
+        }
+      }
+    });
+
     // ===== SUBSCRIPTION FUNCTIONS =====
     let selectedPlan = null;
     let selectedAmount = 0;
@@ -739,24 +770,27 @@
       });
     }
 
+    // ===== LANGUAGE SWITCH FUNCTION =====
+    function setLang(lang) {
+      // This is a placeholder for language switching functionality
+      console.log('Language switched to:', lang);
+      alert('Language switched to: ' + (lang === 'ne' ? 'नेपाली' : 'English'));
+    }
+
     // ===== REMOVE ACTIVE STATE WHEN CLICKING OTHER LINKS =====
     document.querySelectorAll('.main-nav a').forEach(link => {
       link.addEventListener('click', function(e) {
         // Get the href of the clicked link
         const href = this.getAttribute('href');
         
-        // If it's not the current page, remove active from all links
-        // The page will reload and the new page will handle its own active state
-        // But we remove it here so the red indicator disappears immediately
-        if (href !== 'subscribe.html' && href !== '#') {
+        // If it's a different page, remove active from all links
+        // The new page will set its own active state
+        if (href && href !== '#' && !href.startsWith('javascript:')) {
+          // Remove active from all links in the current page before navigation
           document.querySelectorAll('.main-nav a').forEach(l => {
             l.classList.remove('active');
           });
-          // Remove active from subscribe specifically
-          const subscribeLink = document.getElementById('nav-subscribe');
-          if (subscribeLink) {
-            subscribeLink.classList.remove('active');
-          }
+          // Let the navigation happen naturally
         }
       });
     });
