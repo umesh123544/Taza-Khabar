@@ -474,7 +474,7 @@
         <a href="politics.html" id="nav-politics">राजनीति</a>
         <a href="technology.html" id="nav-tech">प्रविधि</a>
         <a href="sports.html" id="nav-sports">खेलकुद</a>
-        <a href="subscribe.html" class="nav-subscribe active" id="nav-subscribe">सदस्यता</a>
+        <a href="subscribe.html" class="nav-subscribe" id="nav-subscribe">सदस्यता</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
     </div>
@@ -696,34 +696,17 @@
       document.getElementById('main-nav').classList.toggle('open');
     });
 
-    // ===== SET ACTIVE NAV LINK BASED ON CURRENT PAGE =====
+    // ===== FIX: SET ACTIVE NAV LINK =====
     document.addEventListener('DOMContentLoaded', function() {
-      // Get current page filename
-      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-      
-      // Remove active from all nav links
+      // सबै लिङ्कबाट active क्लास हटाउने
       document.querySelectorAll('.main-nav a').forEach(link => {
         link.classList.remove('active');
-        // Also remove active from nav-subscribe if it has it
-        if (link.classList.contains('nav-subscribe')) {
-          link.classList.remove('active');
-        }
       });
-      
-      // Set active on the current page link
-      document.querySelectorAll('.main-nav a').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === currentPage) {
-          link.classList.add('active');
-        }
-      });
-      
-      // If we're on subscribe page, make sure subscribe link is highlighted
-      if (currentPage === 'subscribe.html') {
-        const subscribeLink = document.getElementById('nav-subscribe');
-        if (subscribeLink) {
-          subscribeLink.classList.add('active');
-        }
+
+      // subscribe.html मा subscribe link active बनाउने
+      const subscribeLink = document.getElementById('nav-subscribe');
+      if (subscribeLink) {
+        subscribeLink.classList.add('active');
       }
     });
 
@@ -772,28 +755,9 @@
 
     // ===== LANGUAGE SWITCH FUNCTION =====
     function setLang(lang) {
-      // This is a placeholder for language switching functionality
       console.log('Language switched to:', lang);
       alert('Language switched to: ' + (lang === 'ne' ? 'नेपाली' : 'English'));
     }
-
-    // ===== REMOVE ACTIVE STATE WHEN CLICKING OTHER LINKS =====
-    document.querySelectorAll('.main-nav a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        // Get the href of the clicked link
-        const href = this.getAttribute('href');
-        
-        // If it's a different page, remove active from all links
-        // The new page will set its own active state
-        if (href && href !== '#' && !href.startsWith('javascript:')) {
-          // Remove active from all links in the current page before navigation
-          document.querySelectorAll('.main-nav a').forEach(l => {
-            l.classList.remove('active');
-          });
-          // Let the navigation happen naturally
-        }
-      });
-    });
   </script>
 </body>
 </html>
