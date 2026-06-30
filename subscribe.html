@@ -3,38 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>धमाधम खबर | Nepal News & Blog</title>
-  <meta name="description" content="Nepal's trusted source for news and blog content in Nepali and English." />
+  <title>Premium सदस्यता | नेपाल समाचार</title>
   
- <!-- ====== FAVICON ====== -->
-<!-- Standard favicon -->
-<link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
-<link rel="shortcut icon" href="/favicon/favicon.ico" />
-
-<!-- PNG versions -->
-<link rel="icon" type="image/png" sizes="16x16" href="https://imgh.in/host/lfqygh" />
-<link rel="icon" type="image/png" sizes="32x32" href="/https://imgh.in/host/lfqygh" />
-<link rel="icon" type="image/png" sizes="96x96" href="https://imgh.in/host/lfqygh" />
-
-<!-- SVG -->
-<link rel="icon" type="image/svg+xml" href="https://imgh.in/host/lfqygh" />
-
-<!-- Apple Touch Icon -->
-<link rel="apple-touch-icon" sizes="180x180" href="https://imgh.in/host/lfqygh" />
-
-<!-- PWA Manifest -->
-<link rel="manifest" href="/favicon/site.webmanifest" />
-
-<!-- Microsoft Windows -->
-<meta name="msapplication-TileColor" content="#0f172a" />
-<meta name="msapplication-TileImage" content="/favicon/favicon-96x96.png" />
-
-<!-- Theme Color -->
-<meta name="theme-color" content="#0f172a" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
   
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Serif+Devanagari:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  
   <style>
     /* ===== RESET & BASE ===== */
     * {
@@ -42,26 +22,27 @@
       padding: 0;
       box-sizing: border-box;
     }
-
+    :root {
+      --red: #c0392b;
+      --red-dark: #922b21;
+      --bg: #f8fafc;
+      --white: #fff;
+      --text: #1a2744;
+      --muted: #6c757d;
+      --border: #dee2e6;
+    }
     body {
       font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
-      background: #f8fafc;
-      color: #0f172a;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
       line-height: 1.6;
     }
+    a { text-decoration: none; color: inherit; }
+    img { width: 100%; display: block; object-fit: cover; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* ===== TOP BAR ===== */
+    /* ===== TOPBAR ===== */
     .topbar {
       background: #0f172a;
       color: #94a3b8;
@@ -69,7 +50,6 @@
       padding: 8px 0;
       border-bottom: 1px solid #1e293b;
     }
-
     .topbar-inner {
       display: flex;
       justify-content: space-between;
@@ -77,25 +57,19 @@
       flex-wrap: wrap;
       gap: 8px;
     }
-
     .topbar-right {
       display: flex;
       align-items: center;
       gap: 12px;
     }
-
     .topbar-right a {
       color: #94a3b8;
       transition: color 0.2s;
       cursor: pointer;
     }
-
-    .topbar-right a:hover {
-      color: #ffffff;
-    }
-
+    .topbar-right a:hover { color: #ffffff; }
     .btn-login {
-      background: #2563eb;
+      background: var(--red);
       color: #fff !important;
       padding: 4px 14px;
       border-radius: 20px;
@@ -103,53 +77,40 @@
       font-size: 0.8rem;
       transition: background 0.2s;
     }
-
-    .btn-login:hover {
-      background: #1d4ed8 !important;
-      color: #fff !important;
-    }
-
-    #datetime {
-      font-weight: 400;
-      color: #94a3b8;
-    }
+    .btn-login:hover { background: var(--red-dark) !important; color: #fff !important; }
+    #datetime { font-weight: 400; color: #94a3b8; }
 
     /* ===== HEADER ===== */
     .header {
       background: #ffffff;
       border-bottom: 1px solid #e2e8f0;
-      padding: 8px 0;
+      padding: 12px 0;
       position: sticky;
       top: 0;
       z-index: 100;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-
     .header-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-
     .logo a {
       display: flex;
       align-items: center;
     }
-
     .logo-img {
       height: 60px;
       width: auto;
       object-fit: contain;
       display: block;
     }
-
     .main-nav {
       display: flex;
       align-items: center;
       gap: 6px;
       flex-wrap: wrap;
     }
-
     .main-nav a {
       padding: 6px 14px;
       font-size: 0.9rem;
@@ -157,31 +118,18 @@
       color: #334155;
       border-radius: 6px;
       transition: all 0.2s;
+      text-decoration: none;
+      cursor: pointer;
     }
-
     .main-nav a:hover {
       background: #f1f5f9;
       color: #0f172a;
     }
-
     .main-nav a.active {
-      background: #2563eb;
+      background: var(--red);
       color: #fff;
     }
-
-    .nav-subscribe {
-      background: #0f172a;
-      color: #fff !important;
-      padding: 6px 18px !important;
-      border-radius: 20px !important;
-      font-weight: 600;
-    }
-
-    .nav-subscribe:hover {
-      background: #1e293b !important;
-      color: #fff !important;
-    }
-
+    /* REMOVED nav-subscribe SPECIAL STYLES - NOW NORMAL LIKE OTHER LINKS */
     .hamburger {
       display: none;
       font-size: 1.8rem;
@@ -197,15 +145,13 @@
       background: #0f172a;
       color: #fff;
       padding: 8px 0;
-      border-bottom: 2px solid #2563eb;
+      border-bottom: 2px solid var(--red);
     }
-
     .breaking-inner {
       display: flex;
       align-items: center;
       gap: 16px;
     }
-
     .breaking-label {
       background: #dc2626;
       color: #fff;
@@ -217,12 +163,7 @@
       letter-spacing: 0.5px;
       white-space: nowrap;
     }
-
-    .ticker-wrap {
-      overflow: hidden;
-      flex: 1;
-    }
-
+    .ticker-wrap { overflow: hidden; flex: 1; }
     .ticker {
       display: inline-block;
       white-space: nowrap;
@@ -230,487 +171,198 @@
       font-size: 0.9rem;
       color: #e2e8f0;
     }
-
     @keyframes ticker-scroll {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
 
-    /* ===== MAIN LAYOUT ===== */
-    .main-layout {
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 32px;
-      padding: 32px 20px;
-    }
-
-    /* ===== FEATURED ARTICLE ===== */
-    .featured-article {
-      background: #fff;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      margin-bottom: 32px;
-    }
-
-    .featured-img-wrap {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .featured-img {
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .category-badge {
-      position: absolute;
-      bottom: 16px;
-      left: 16px;
-      background: #2563eb;
-      color: #fff;
-      padding: 4px 16px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
-    .featured-body {
-      padding: 28px 30px 30px;
-    }
-
-    .featured-title {
+    /* ===== SUB PAGE ===== */
+    .sub-page { padding: 40px 16px; }
+    .sub-hero { text-align: center; margin-bottom: 40px; }
+    .sub-hero h1 {
       font-family: 'Noto Serif Devanagari', serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 6px;
-    }
-
-    .featured-title-en {
-      font-size: 0.95rem;
-      color: #64748b;
-      margin-bottom: 14px;
-    }
-
-    .featured-excerpt {
-      color: #334155;
-      font-size: 1.05rem;
-      margin-bottom: 16px;
-    }
-
-    .article-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      color: #64748b;
-      font-size: 0.9rem;
-      margin-bottom: 16px;
-    }
-
-    .article-meta.small {
-      font-size: 0.8rem;
-      gap: 12px;
-    }
-
-    .btn-read-more {
-      display: inline-block;
-      background: #0f172a;
-      color: #fff;
-      padding: 10px 28px;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: background 0.2s;
-    }
-
-    .btn-read-more:hover {
-      background: #1e293b;
-    }
-
-    /* ===== SECTION HEADER ===== */
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 32px 0 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #e2e8f0;
-    }
-
-    .section-header h2 {
-      font-size: 1.4rem;
-      font-weight: 700;
-    }
-
-    .section-header a {
-      color: #2563eb;
-      font-weight: 500;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-
-    .section-header a:hover {
-      color: #1d4ed8;
-    }
-
-    /* ===== NEWS GRID ===== */
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .news-card {
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-    }
-
-    .news-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    }
-
-    .news-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .news-card-body {
-      padding: 16px 18px 18px;
-    }
-
-    .news-card-body h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin: 8px 0 6px;
-      line-height: 1.3;
-    }
-
-    .news-card-body p {
-      color: #475569;
-      font-size: 0.9rem;
+      font-size: 28px;
+      color: #1a2744;
       margin-bottom: 10px;
     }
+    .sub-hero p { color: #555; font-size: 15px; max-width: 560px; margin: 0 auto; }
 
-    .tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 2px 12px;
-      border-radius: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-
-    .tag-tech { background: #dbeafe; color: #1d4ed8; }
-    .tag-economy { background: #d1fae5; color: #065f46; }
-    .tag-sports { background: #fce7f3; color: #9d174d; }
-    .tag-tourism { background: #fef3c7; color: #92400e; }
-    .tag-health { background: #fce4ec; color: #b71c1c; }
-    .tag-local { background: #e0f2fe; color: #0369a1; }
-    .tag-blog { background: #f3e8ff; color: #6b21a8; }
-
-    .read-link {
-      display: inline-block;
-      color: #2563eb;
-      font-weight: 600;
-      font-size: 0.85rem;
-      margin-top: 4px;
-      transition: color 0.2s;
-    }
-
-    .read-link:hover {
-      color: #1d4ed8;
-    }
-
-    .premium {
-      border: 2px solid #fcd34d;
-      position: relative;
-    }
-
-    .premium-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: #fcd34d;
-      color: #0f172a;
-      font-weight: 700;
-      font-size: 0.7rem;
-      padding: 2px 12px;
-      border-radius: 12px;
-      z-index: 2;
-    }
-
-    .premium-lock {
-      color: #f59e0b !important;
-    }
-
-    /* ===== BLOG LIST ===== */
-    .blog-list {
-      display: flex;
-      flex-direction: column;
+    /* ===== PLANS ===== */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 20px;
+      max-width: 860px;
+      margin: 0 auto 40px;
     }
-
-    .blog-item {
-      display: flex;
-      gap: 18px;
-      background: #fff;
-      padding: 16px;
+    .plan-card {
+      background: white;
       border-radius: 12px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-      transition: box-shadow 0.2s;
-    }
-
-    .blog-item:hover {
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    }
-
-    .blog-item img {
-      width: 150px;
-      height: 110px;
-      object-fit: cover;
-      border-radius: 8px;
-      flex-shrink: 0;
-    }
-
-    .blog-body {
-      flex: 1;
-    }
-
-    .blog-body h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin: 4px 0 6px;
-    }
-
-    .blog-body p {
-      color: #475569;
-      font-size: 0.9rem;
-      margin-bottom: 6px;
-    }
-
-    /* ===== SIDEBAR ===== */
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .sidebar-widget {
-      background: #ffffff;
-      padding: 20px 22px;
-      border-radius: 12px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    }
-
-    .sidebar-widget h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      border-bottom: 2px solid #f1f5f9;
-      padding-bottom: 10px;
-    }
-
-    .search-box {
-      display: flex;
-      gap: 8px;
-    }
-
-    .search-box input {
-      flex: 1;
-      padding: 8px 14px;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      outline: none;
-      transition: border 0.2s;
-    }
-
-    .search-box input:focus {
-      border-color: #2563eb;
-    }
-
-    .search-box button {
-      padding: 8px 18px;
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .search-box button:hover {
-      background: #1d4ed8;
-    }
-
-    /* Subscribe Widget */
-    .subscribe-widget {
-      background: #0f172a;
-      color: #e2e8f0;
-    }
-
-    .subscribe-widget h3 {
-      color: #fff;
-      border-bottom-color: #1e293b;
-    }
-
-    .subscribe-features {
-      list-style: none;
-      margin: 12px 0 16px;
-    }
-
-    .subscribe-features li {
-      padding: 4px 0;
-      font-size: 0.9rem;
-    }
-
-    .price-options {
-      display: flex;
-      gap: 12px;
-      margin: 12px 0 16px;
-    }
-
-    .price-option {
-      flex: 1;
-      background: #1e293b;
-      padding: 12px;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    .price-option.featured {
-      background: #2563eb;
-      color: #fff;
-    }
-
-    .price-option span {
-      display: block;
-      font-size: 0.75rem;
-      opacity: 0.8;
-    }
-
-    .price-option strong {
-      font-size: 1.1rem;
-    }
-
-    .btn-subscribe {
-      display: block;
-      text-align: center;
-      background: #fcd34d;
-      color: #0f172a;
-      font-weight: 700;
-      padding: 10px;
-      border-radius: 8px;
-      transition: background 0.2s;
-    }
-
-    .btn-subscribe:hover {
-      background: #fbbf24;
-    }
-
-    /* Trending */
-    .trending-list {
-      list-style: none;
-      counter-reset: trending;
-    }
-
-    .trending-list li {
-      counter-increment: trending;
-      padding: 6px 0 6px 28px;
+      padding: 28px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      border: 2px solid #dee2e6;
       position: relative;
-      border-bottom: 1px solid #f1f5f9;
+      transition: transform 0.2s;
     }
-
-    .trending-list li::before {
-      content: counter(trending);
+    .plan-card:hover { transform: translateY(-4px); }
+    .plan-card.featured { border-color: #d4a017; }
+    .plan-badge {
       position: absolute;
-      left: 0;
-      top: 6px;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #d4a017;
+      color: #1a2744;
+      font-size: 11px;
       font-weight: 700;
-      color: #2563eb;
-      font-size: 0.9rem;
+      padding: 4px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
     }
-
-    .trending-list li a {
-      color: #0f172a;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-
-    .trending-list li a:hover {
-      color: #2563eb;
-    }
-
-    /* Newsletter */
-    .newsletter-form {
+    .plan-name { font-size: 18px; font-weight: 700; color: #1a2744; margin-bottom: 8px; }
+    .plan-price { font-size: 32px; font-weight: 700; color: var(--red); }
+    .plan-price span { font-size: 14px; color: #6c757d; font-weight: 400; }
+    .plan-features { margin: 16px 0; list-style: none; }
+    .plan-features li {
+      font-size: 14px;
+      color: #495057;
+      padding: 6px 0;
+      border-bottom: 1px solid #f0f0f0;
       display: flex;
       gap: 8px;
-      margin-top: 8px;
     }
-
-    .newsletter-form input {
-      flex: 1;
-      padding: 8px 14px;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      outline: none;
-    }
-
-    .newsletter-form input:focus {
-      border-color: #2563eb;
-    }
-
-    .newsletter-form button {
-      padding: 8px 18px;
-      background: #0f172a;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
+    .plan-features li:last-child { border-bottom: none; }
+    .btn-plan {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      margin-top: 16px;
+      border: none;
+      width: 100%;
+    }
+    .btn-plan-primary {
+      background: var(--red);
+      color: white;
+    }
+    .btn-plan-primary:hover { background: var(--red-dark); color: white; }
+    .btn-plan-outline {
+      background: white;
+      color: #1a2744;
+      border: 2px solid #1a2744;
+    }
+    .btn-plan-outline:hover { background: #1a2744; color: white; }
+
+    /* ===== PAYMENT ===== */
+    .payment-section {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 560px;
+      margin: 0 auto;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .payment-section h2 { font-size: 20px; color: #1a2744; margin-bottom: 20px; }
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .pay-btn {
+      padding: 12px 8px;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      background: white;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .pay-btn:hover, .pay-btn.active {
+      border-color: var(--red);
+      background: #fdf2f2;
+      color: var(--red);
+    }
+    .pay-btn .pay-icon { font-size: 24px; display: block; margin-bottom: 4px; }
+    .esewa-color { color: #60bb46; }
+    .khalti-color { color: #5c2d91; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      color: #495057;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .btn-pay {
+      width: 100%;
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
       transition: background 0.2s;
     }
-
-    .newsletter-form button:hover {
-      background: #1e293b;
+    .btn-pay:hover { background: var(--red-dark); }
+    .secure-note {
+      text-align: center;
+      font-size: 12px;
+      color: #6c757d;
+      margin-top: 10px;
     }
 
-    /* Social Links */
-    .social-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    /* ===== SUCCESS OVERLAY ===== */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
     }
-
-    .social-btn {
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #fff;
-      transition: opacity 0.2s;
+    .success-overlay.show { display: flex; }
+    .success-box {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      max-width: 360px;
     }
-
-    .social-btn:hover {
-      opacity: 0.8;
+    .success-box .icon { font-size: 60px; margin-bottom: 16px; }
+    .success-box h2 { color: #2e7d32; margin-bottom: 8px; }
+    .success-box p { color: #555; font-size: 14px; margin-bottom: 20px; }
+    .success-box a {
+      display: block;
+      background: var(--red);
+      color: white;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 700;
     }
-
-    .social-btn.fb { background: #1877f2; }
-    .social-btn.yt { background: #ff0000; }
-    .social-btn.tw { background: #000000; }
-    .social-btn.wa { background: #25d366; }
+    .success-box a:hover { background: var(--red-dark); }
 
     /* ===== FOOTER ===== */
     .footer {
@@ -719,7 +371,6 @@
       margin-top: 40px;
       padding: 40px 0 0;
     }
-
     .footer-inner {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -727,37 +378,21 @@
       padding-bottom: 32px;
       border-bottom: 1px solid #1e293b;
     }
-
     .footer-col h4 {
       color: #fff;
       font-size: 1rem;
       font-weight: 600;
       margin-bottom: 12px;
     }
-
-    .footer-col p {
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-
-    .footer-col ul {
-      list-style: none;
-    }
-
-    .footer-col ul li {
-      padding: 4px 0;
-    }
-
+    .footer-col p { font-size: 0.9rem; line-height: 1.6; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { padding: 4px 0; }
     .footer-col ul li a {
       color: #94a3b8;
       font-size: 0.9rem;
       transition: color 0.2s;
     }
-
-    .footer-col ul li a:hover {
-      color: #fff;
-    }
-
+    .footer-col ul li a:hover { color: #fff; }
     .footer-bottom {
       text-align: center;
       padding: 16px 0;
@@ -766,21 +401,8 @@
     }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 1024px) {
-      .main-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .news-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
     @media (max-width: 768px) {
-      .hamburger {
-        display: block;
-      }
-
+      .hamburger { display: block; }
       .main-nav {
         display: none;
         flex-direction: column;
@@ -790,79 +412,20 @@
         border-top: 1px solid #e2e8f0;
         margin-top: 12px;
       }
-
-      .main-nav.open {
-        display: flex;
-      }
-
-      .main-nav a {
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-      }
-
-      .header-inner {
-        flex-wrap: wrap;
-      }
-
-      .topbar-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-      }
-
-      .featured-img {
-        height: 220px;
-      }
-
-      .featured-body {
-        padding: 20px;
-      }
-
-      .featured-title {
-        font-size: 1.4rem;
-      }
-
-      .news-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .blog-item {
-        flex-direction: column;
-      }
-
-      .blog-item img {
-        width: 100%;
-        height: 160px;
-      }
-
-      .footer-inner {
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-      }
-
-      .price-options {
-        flex-direction: column;
-      }
-
-      .search-box,
-      .newsletter-form {
-        flex-direction: column;
-      }
-
-      .logo-img {
-        height: 50px;
-      }
+      .main-nav.open { display: flex; }
+      .main-nav a { width: 100%; text-align: center; padding: 10px; }
+      .header-inner { flex-wrap: wrap; }
+      .topbar-inner { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .logo-img { height: 50px; }
+      .plans-grid { grid-template-columns: 1fr; }
+      .payment-methods { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 480px) {
-      .footer-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .logo-img {
-        height: 45px;
-      }
+      .footer-inner { grid-template-columns: 1fr; }
+      .logo-img { height: 45px; }
+      .payment-methods { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -871,7 +434,8 @@
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="container topbar-inner">
-      <span id="datetime"></span>
+      <a href="index.html" style="color:#94a3b8;">← गृहपृष्ठमा फर्कनुहोस्</a>
+      <span style="color:#6c757d;">Secure Payment</span>
       <div class="topbar-right">
         <a href="#" onclick="setLang('ne')" id="lang-ne">नेपाली</a>
         <span>|</span>
@@ -886,17 +450,17 @@
     <div class="container header-inner">
       <div class="logo">
         <a href="index.html">
-          <img src="https://i.ibb.co/fGz4qtwn/dhamadhamkhabar.png" alt="धमाधम खबर" class="logo-img" />
+          <img src="dhamadhamkhabar.png" alt="धमाधम खबर" class="logo-img" />
         </a>
       </div>
       <nav class="main-nav" id="main-nav">
-        <a href="index.html" id="nav-home" data-ne="गृहपृष्ठ" data-en="Home">गृहपृष्ठ</a>
-        <a href="news.html" id="nav-news" data-ne="समाचार" data-en="News">समाचार</a>
-        <a href="blog.html" id="nav-blog" data-ne="ब्लग" data-en="Blog">ब्लग</a>
-        <a href="politics.html" id="nav-politics" data-ne="राजनीति" data-en="Politics">राजनीति</a>
-        <a href="technology.html" id="nav-tech" data-ne="प्रविधि" data-en="Technology">प्रविधि</a>
-        <a href="sports.html" id="nav-sports" data-ne="खेलकुद" data-en="Sports">खेलकुद</a>
-        <a href="subscribe.html" class="nav-subscribe" id="nav-subscribe" data-ne="सदस्यता लिनुहोस्" data-en="Subscribe">सदस्यता</a>
+        <a href="index.html" id="nav-home">गृहपृष्ठ</a>
+        <a href="news.html" id="nav-news">समाचार</a>
+        <a href="blog.html" id="nav-blog">ब्लग</a>
+        <a href="politics.html" id="nav-politics">राजनीति</a>
+        <a href="technology.html" id="nav-tech">प्रविधि</a>
+        <a href="sports.html" id="nav-sports">खेलकुद</a>
+        <a href="subscribe.html" id="nav-subscribe">सदस्यता</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
     </div>
@@ -915,236 +479,147 @@
   </div>
 
   <!-- MAIN CONTENT -->
-  <main class="container main-layout">
+  <main class="sub-page container">
+    <div class="sub-hero">
+      <h1>⭐ Premium सदस्यता लिनुहोस्</h1>
+      <p>सबै प्रिमियम समाचार, गहन विश्लेषण, र विज्ञापन-मुक्त अनुभव प्राप्त गर्नुहोस्। नेपालको सबैभन्दा विश्वसनीय समाचार स्रोतमा पहुँच पाउनुहोस्।</p>
+    </div>
 
-    <!-- LEFT: FEATURED + ARTICLES -->
-    <section class="content-main">
-
-      <!-- FEATURED ARTICLE -->
-      <article class="featured-article">
-        <div class="featured-img-wrap">
-          <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=800&q=80" alt="Featured News" class="featured-img" />
-          <span class="category-badge">राजनीति | Politics</span>
-        </div>
-        <div class="featured-body">
-          <h1 class="featured-title">नेपाल सरकारले आगामी आर्थिक वर्षको बजेट घोषणा गर्यो — नयाँ विकास योजनाहरू सार्वजनिक</h1>
-          <p class="featured-title-en">Nepal Government Announces Budget for Upcoming Fiscal Year — New Development Plans Revealed</p>
-          <p class="featured-excerpt">सरकारले यस वर्षको बजेटमा शिक्षा, स्वास्थ्य र पूर्वाधार विकासमा विशेष ध्यान दिएको छ। वित्त मन्त्रालयका अनुसार यस पटकको बजेट ऐतिहासिक रूपमा ठूलो छ र यसले लाखौं नागरिकको जीवनस्तरमा सुधार ल्याउनेछ।</p>
-          <div class="article-meta">
-            <span class="author">&#9998; रमेश श्रेष्ठ</span>
-            <span class="date">&#128197; २०८१ असार १५</span>
-            <span class="read-time">&#9202; ५ मिनेट</span>
-          </div>
-          <a href="article.html" class="btn-read-more">पूरा पढ्नुहोस् | Read More →</a>
-        </div>
-      </article>
-
-      <!-- SECTION TITLE -->
-      <div class="section-header">
-        <h2>ताजा समाचार | Latest News</h2>
-        <a href="news.html">सबै हेर्नुहोस् →</a>
+    <!-- PLANS -->
+    <div class="plans-grid">
+      <div class="plan-card">
+        <p class="plan-name">🆓 निःशुल्क</p>
+        <div class="plan-price">रू. ०<span>/महिना</span></div>
+        <ul class="plan-features">
+          <li>✅ ५ समाचार/दिन</li>
+          <li>✅ मूल समाचार</li>
+          <li>❌ प्रिमियम विश्लेषण</li>
+          <li>❌ विज्ञापन-मुक्त</li>
+          <li>❌ PDF डाउनलोड</li>
+        </ul>
+        <a href="index.html" class="btn-plan btn-plan-outline">निःशुल्क जारी राख्नुहोस्</a>
       </div>
 
-      <!-- NEWS GRID -->
-      <div class="news-grid">
-
-        <article class="news-card">
-          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80" alt="Tech" />
-          <div class="news-card-body">
-            <span class="tag tag-tech">प्रविधि</span>
-            <h3>नेपालमा डिजिटल भुक्तानी प्रणाली थप विस्तार हुँदै</h3>
-            <p>eSewa र Khalti लगायत डिजिटल वालेटहरूले नयाँ सुविधा थपेका छन्।</p>
-            <div class="article-meta small">
-              <span>&#128197; असार १४</span>
-              <span>&#9202; ३ मिनेट</span>
-            </div>
-            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
-          </div>
-        </article>
-
-        <article class="news-card premium">
-          <div class="premium-badge">&#128274; Premium</div>
-          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&q=80" alt="Economy" />
-          <div class="news-card-body">
-            <span class="tag tag-economy">अर्थतन्त्र</span>
-            <h3>नेपालको विदेशी मुद्रा सञ्चिति बढ्दो क्रममा</h3>
-            <p>राष्ट्र बैंकका अनुसार विदेशी मुद्रा सञ्चिति यस वर्ष उल्लेखनीय रूपमा बढेको छ।</p>
-            <div class="article-meta small">
-              <span>&#128197; असार १३</span>
-              <span>&#9202; ४ मिनेट</span>
-            </div>
-            <a href="subscribe.html" class="read-link premium-lock">&#128274; सदस्यता चाहिन्छ →</a>
-          </div>
-        </article>
-
-        <article class="news-card">
-          <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&q=80" alt="Sports" />
-          <div class="news-card-body">
-            <span class="tag tag-sports">खेलकुद</span>
-            <h3>नेपाली क्रिकेट टोली T20 विश्वकपमा छनोट</h3>
-            <p>नेपालले छनोट खेलमा अफगानिस्तानलाई हराएर T20 विश्वकपमा स्थान पक्का गरेको छ।</p>
-            <div class="article-meta small">
-              <span>&#128197; असार १२</span>
-              <span>&#9202; २ मिनेट</span>
-            </div>
-            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
-          </div>
-        </article>
-
-        <article class="news-card premium">
-          <div class="premium-badge">&#128274; Premium</div>
-          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80" alt="Tourism" />
-          <div class="news-card-body">
-            <span class="tag tag-tourism">पर्यटन</span>
-            <h3>यस वर्ष नेपालमा पर्यटकको संख्या रेकर्ड उचाइमा</h3>
-            <p>पर्यटन बोर्डका अनुसार यस वर्ष अहिलेसम्मकै धेरै पर्यटक नेपाल भित्रिएका छन्।</p>
-            <div class="article-meta small">
-              <span>&#128197; असार ११</span>
-              <span>&#9202; ३ मिनेट</span>
-            </div>
-            <a href="subscribe.html" class="read-link premium-lock">&#128274; सदस्यता चाहिन्छ →</a>
-          </div>
-        </article>
-
-        <article class="news-card">
-          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80" alt="Health" />
-          <div class="news-card-body">
-            <span class="tag tag-health">स्वास्थ्य</span>
-            <h3>काठमाडौंमा नयाँ अस्पताल निर्माण हुँदै</h3>
-            <p>सरकारले काठमाडौं उपत्यकामा थप दुईवटा अस्पताल निर्माण गर्ने घोषणा गरेको छ।</p>
-            <div class="article-meta small">
-              <span>&#128197; असार १०</span>
-              <span>&#9202; ३ मिनेट</span>
-            </div>
-            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
-          </div>
-        </article>
-
-        <article class="news-card">
-          <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&q=80" alt="City" />
-          <div class="news-card-body">
-            <span class="tag tag-local">स्थानीय</span>
-            <h3>काठमाडौं महानगरले सडक विस्तार योजना सार्वजनिक गर्यो</h3>
-            <p>महानगरपालिकाले यस वर्ष प्रमुख सडकहरू चौडा गर्ने योजना अघि सारेको छ।</p>
-            <div class="article-meta small">
-              <span>&#128197; असार ९</span>
-              <span>&#9202; २ मिनेट</span>
-            </div>
-            <a href="article.html" class="read-link">पढ्नुहोस् →</a>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- BLOG SECTION -->
-      <div class="section-header">
-        <h2>ब्लग | Blog</h2>
-        <a href="blog.html">सबै हेर्नुहोस् →</a>
-      </div>
-
-      <div class="blog-list">
-        <article class="blog-item">
-          <img src="https://images.unsplash.com/photo-1558008258-3256797b43f3?w=200&q=80" alt="Blog" />
-          <div class="blog-body">
-            <span class="tag tag-blog">ब्लग</span>
-            <h3>नेपालको भविष्य: युवा पुस्ताको भूमिका</h3>
-            <p>नेपालको विकासमा युवाहरूको योगदान र आउँदो दिनमा के गर्न सकिन्छ भन्ने बारेमा...</p>
-            <div class="article-meta small">
-              <span>&#9998; सुनिता तामाङ</span>
-              <span>&#128197; असार ८</span>
-            </div>
-            <a href="article.html" class="read-link">पूरा पढ्नुहोस् →</a>
-          </div>
-        </article>
-
-        <article class="blog-item">
-          <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=200&q=80" alt="Blog" />
-          <div class="blog-body">
-            <span class="tag tag-blog">ब्लग</span>
-            <h3>हिमालय यात्रा: एउटा अविस्मरणीय अनुभव</h3>
-            <p>मेरो अन्नपूर्ण बेस क्याम्प यात्राको अनुभव र केही महत्वपूर्ण सुझावहरू...</p>
-            <div class="article-meta small">
-              <span>&#9998; आकाश गुरुङ</span>
-              <span>&#128197; असार ७</span>
-            </div>
-            <a href="article.html" class="read-link">पूरा पढ्नुहोस् →</a>
-          </div>
-        </article>
-      </div>
-
-    </section>
-
-    <!-- RIGHT: SIDEBAR -->
-    <aside class="sidebar">
-
-      <!-- SEARCH -->
-      <div class="sidebar-widget">
-        <h3>&#128269; खोज्नुहोस् | Search</h3>
-        <div class="search-box">
-          <input type="text" placeholder="समाचार खोज्नुहोस्..." id="search-input" />
-          <button onclick="doSearch()">खोज</button>
-        </div>
-      </div>
-
-      <!-- SUBSCRIBE WIDGET -->
-      <div class="sidebar-widget subscribe-widget">
-        <h3>&#11088; Premium सदस्यता</h3>
-        <p>सबै प्रिमियम समाचार र विश्लेषण पढ्नुहोस्।</p>
-        <ul class="subscribe-features">
+      <div class="plan-card">
+        <p class="plan-name">📰 मासिक</p>
+        <div class="plan-price">रू. ५००<span>/महिना</span></div>
+        <ul class="plan-features">
           <li>✅ असीमित समाचार</li>
-          <li>✅ विशेष विश्लेषण</li>
+          <li>✅ प्रिमियम विश्लेषण</li>
           <li>✅ विज्ञापन-मुक्त</li>
           <li>✅ PDF डाउनलोड</li>
+          <li>✅ Newsletter</li>
         </ul>
-        <div class="price-options">
-          <div class="price-option">
-            <span>मासिक</span>
-            <strong>रू. ५००/महिना</strong>
-          </div>
-          <div class="price-option featured">
-            <span>वार्षिक &#128293;</span>
-            <strong>रू. ४,५००/वर्ष</strong>
-          </div>
+        <button class="btn-plan btn-plan-primary" onclick="selectPlan('monthly', 500)">छान्नुहोस् →</button>
+      </div>
+
+      <div class="plan-card featured">
+        <div class="plan-badge">🔥 सबैभन्दा राम्रो मूल्य</div>
+        <p class="plan-name">🏆 वार्षिक</p>
+        <div class="plan-price">रू. ४,५००<span>/वर्ष</span></div>
+        <p style="font-size:12px; color:#2e7d32; margin-bottom:4px">रू. 1,500 बचत!</p>
+        <ul class="plan-features">
+          <li>✅ असीमित समाचार</li>
+          <li>✅ प्रिमियम विश्लेषण</li>
+          <li>✅ विज्ञापन-मुक्त</li>
+          <li>✅ PDF डाउनलोड</li>
+          <li>✅ Newsletter + Priority</li>
+        </ul>
+        <button class="btn-plan btn-plan-primary" onclick="selectPlan('annual', 4500)">छान्नुहोस् →</button>
+      </div>
+    </div>
+
+    <!-- PAYMENT FORM -->
+    <div class="payment-section" id="payment-section" style="display:none">
+      <h2>💳 भुक्तानी गर्नुहोस्</h2>
+      <p id="selected-plan-info" style="background:#f8f9fa; padding:10px 14px; border-radius:6px; margin-bottom:20px; font-size:14px; color:#495057;"></p>
+
+      <p style="font-size:14px; font-weight:600; margin-bottom:10px; color:#1a2744;">भुक्तानी विधि छान्नुहोस्</p>
+      <div class="payment-methods">
+        <button class="pay-btn" onclick="selectPayment('esewa')">
+          <span class="pay-icon esewa-color">💚</span>eSewa
+        </button>
+        <button class="pay-btn" onclick="selectPayment('khalti')">
+          <span class="pay-icon khalti-color">💜</span>Khalti
+        </button>
+        <button class="pay-btn" onclick="selectPayment('bank')">
+          <span class="pay-icon">🏦</span>Bank Transfer
+        </button>
+        <button class="pay-btn" onclick="selectPayment('card')">
+          <span class="pay-icon">💳</span>Card
+        </button>
+      </div>
+
+      <!-- ESEWA FORM -->
+      <div id="esewa-form" style="display:none">
+        <div style="background:#f0faf0; border: 1px solid #b8dfb8; border-radius:8px; padding:16px; margin-bottom:16px;">
+          <p style="font-size:14px; color:#2e7d32; font-weight:600;">eSewa मार्फत भुक्तानी गर्न:</p>
+          <ol style="font-size:13px; color:#495057; padding-left:16px; margin-top:8px;">
+            <li>आफ्नो eSewa ID तयार राख्नुहोस्</li>
+            <li>तल आफ्नो eSewa नम्बर राख्नुहोस्</li>
+            <li>"भुक्तानी गर्नुहोस्" थिच्नुहोस्</li>
+            <li>eSewa App मा OTP पुष्टि गर्नुहोस्</li>
+          </ol>
         </div>
-        <a href="subscribe.html" class="btn-subscribe">सदस्यता लिनुहोस्</a>
-      </div>
-
-      <!-- TRENDING -->
-      <div class="sidebar-widget">
-        <h3>&#128200; ट्रेन्डिङ | Trending</h3>
-        <ol class="trending-list">
-          <li><a href="article.html">नेपालको अर्थतन्त्र: अबको बाटो कस्तो?</a></li>
-          <li><a href="article.html">काठमाडौंमा विद्युत् कटौती कम हुँदै</a></li>
-          <li><a href="article.html">नेपाली सेनाको नयाँ भर्ती खुल्यो</a></li>
-          <li><a href="article.html">पशुपतिनाथ मन्दिर विकास योजना</a></li>
-          <li><a href="article.html">नेपालमा इन्टरनेट प्रयोगकर्ता बढे</a></li>
-        </ol>
-      </div>
-
-      <!-- NEWSLETTER -->
-      <div class="sidebar-widget">
-        <h3>&#128140; Newsletter</h3>
-        <p>दैनिक समाचार आफ्नो इमेलमा प्राप्त गर्नुहोस्।</p>
-        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
-          <input type="email" placeholder="your@email.com" required />
-          <button type="submit">Subscribe</button>
-        </form>
-        <p id="newsletter-msg" style="display:none; color: green; margin-top: 8px;">✅ सफलतापूर्वक दर्ता भयो!</p>
-      </div>
-
-      <!-- FOLLOW US -->
-      <div class="sidebar-widget">
-        <h3>&#127760; हामीलाई Follow गर्नुहोस्</h3>
-        <div class="social-links">
-          <a href="#" class="social-btn fb">Facebook</a>
-          <a href="#" class="social-btn yt">YouTube</a>
-          <a href="#" class="social-btn tw">Twitter/X</a>
-          <a href="#" class="social-btn wa">WhatsApp</a>
+        <div class="form-group">
+          <label>eSewa ID / मोबाइल नम्बर</label>
+          <input type="tel" id="esewa-id" placeholder="98XXXXXXXX" />
         </div>
+        <button class="btn-pay" onclick="processPayment('eSewa')">💚 eSewa बाट भुक्तानी गर्नुहोस्</button>
       </div>
 
-    </aside>
+      <!-- KHALTI FORM -->
+      <div id="khalti-form" style="display:none">
+        <div style="background:#f5f0ff; border: 1px solid #c9b8e8; border-radius:8px; padding:16px; margin-bottom:16px;">
+          <p style="font-size:14px; color:#5c2d91; font-weight:600;">Khalti मार्फत भुक्तानी गर्न:</p>
+          <ol style="font-size:13px; color:#495057; padding-left:16px; margin-top:8px;">
+            <li>आफ्नो Khalti खाता तयार राख्नुहोस्</li>
+            <li>मोबाइल नम्बर दिनुहोस्</li>
+            <li>Khalti App मा OTP पुष्टि गर्नुहोस्</li>
+          </ol>
+        </div>
+        <div class="form-group">
+          <label>Khalti मोबाइल नम्बर</label>
+          <input type="tel" id="khalti-id" placeholder="98XXXXXXXX" />
+        </div>
+        <button class="btn-pay" onclick="processPayment('Khalti')" style="background:#5c2d91;">💜 Khalti बाट भुक्तानी गर्नुहोस्</button>
+      </div>
+
+      <!-- BANK FORM -->
+      <div id="bank-form" style="display:none">
+        <div style="background:#fff3e0; border: 1px solid #ffe0b2; border-radius:8px; padding:16px; margin-bottom:16px;">
+          <p style="font-size:14px; font-weight:600; color:#e65100;">बैंक विवरण</p>
+          <p style="font-size:13px; color:#495057; margin-top:8px;">बैंक: Nepal Investment Bank<br/>खाता नाम: Nepal Samachar Pvt. Ltd.<br/>खाता नम्बर: 012345678901234<br/>Branch: Kathmandu, Newroad</p>
+        </div>
+        <div class="form-group"><label>तपाईंको नाम</label><input type="text" placeholder="राम बहादुर श्रेष्ठ" /></div>
+        <div class="form-group"><label>रसिद नम्बर</label><input type="text" placeholder="TXN123456" /></div>
+        <button class="btn-pay" onclick="processPayment('Bank Transfer')">🏦 पुष्टि गर्नुहोस्</button>
+      </div>
+
+      <!-- CARD FORM -->
+      <div id="card-form" style="display:none">
+        <div class="form-group"><label>Card Number</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19" id="card-num" /></div>
+        <div class="form-row">
+          <div class="form-group"><label>Expiry Date</label><input type="text" placeholder="MM/YY" maxlength="5" /></div>
+          <div class="form-group"><label>CVV</label><input type="text" placeholder="123" maxlength="3" /></div>
+        </div>
+        <div class="form-group"><label>Name on Card</label><input type="text" placeholder="RAM BAHADUR SHRESTHA" /></div>
+        <button class="btn-pay" onclick="processPayment('Card')">💳 Pay Now</button>
+      </div>
+
+      <p class="secure-note">🔒 तपाईंको भुक्तानी सुरक्षित र एन्क्रिप्टेड छ</p>
+    </div>
   </main>
+
+  <!-- SUCCESS OVERLAY -->
+  <div class="success-overlay" id="success-overlay">
+    <div class="success-box">
+      <div class="icon">🎉</div>
+      <h2>बधाई छ!</h2>
+      <p>तपाईंको Premium सदस्यता सफलतापूर्वक सक्रिय भयो। अब सबै प्रिमियम सामग्री उपलब्ध छ।</p>
+      <a href="index.html">गृहपृष्ठमा जानुहोस् →</a>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -1154,7 +629,7 @@
         <p>नेपालको विश्वसनीय समाचार स्रोत। हामी सटीक र निष्पक्ष समाचार प्रदान गर्छौं।</p>
       </div>
       <div class="footer-col">
-        <h4>विभाग | Sections</h4>
+        <h4>विभाग</h4>
         <ul>
           <li><a href="news.html">समाचार</a></li>
           <li><a href="blog.html">ब्लग</a></li>
@@ -1164,17 +639,16 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>जानकारी | Info</h4>
+        <h4>जानकारी</h4>
         <ul>
           <li><a href="about.html">हाम्रो बारे</a></li>
           <li><a href="contact.html">सम्पर्क</a></li>
-          <li><a href="advertise.html">विज्ञापन</a></li>
           <li><a href="privacy.html">गोपनीयता नीति</a></li>
           <li><a href="terms.html">सर्तहरू</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>सम्पर्क | Contact</h4>
+        <h4>सम्पर्क</h4>
         <p>&#128205; काठमाडौं, नेपाल</p>
         <p>&#128222; +977-1-XXXXXXX</p>
         <p>&#128140; info@nepalsamachar.com</p>
@@ -1185,22 +659,20 @@
     </div>
   </footer>
 
-  <!-- Google Translate Element -->
-  <div id="google_translate_element" style="display:none;"></div>
-
   <script>
     // ===== DATETIME =====
     function updateDateTime() {
       const now = new Date();
-      const options = { 
-        year: 'numeric', 
-        month: 'long', 
+      const options = {
+        year: 'numeric',
+        month: 'long',
         day: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
         timeZone: 'Asia/Kathmandu'
       };
-      document.getElementById('datetime').textContent = now.toLocaleDateString('ne-NP', options);
+      const el = document.getElementById('datetime');
+      if (el) el.textContent = now.toLocaleDateString('ne-NP', options);
     }
     updateDateTime();
     setInterval(updateDateTime, 60000);
@@ -1210,7 +682,7 @@
       document.getElementById('main-nav').classList.toggle('open');
     });
 
-    // ===== SET ACTIVE NAV LINK - FIX =====
+    // ===== SET ACTIVE NAV LINK =====
     document.addEventListener('DOMContentLoaded', function() {
       // Get current page filename
       const currentPage = window.location.pathname.split('/').pop() || 'index.html';
@@ -1218,10 +690,6 @@
       // Remove active from all nav links
       document.querySelectorAll('.main-nav a').forEach(link => {
         link.classList.remove('active');
-        // Also remove active from nav-subscribe if it has it
-        if (link.classList.contains('nav-subscribe')) {
-          link.classList.remove('active');
-        }
       });
       
       // Set active on the current page link
@@ -1232,99 +700,63 @@
         }
       });
       
-      // If we're on index page, make sure home link is highlighted
-      if (currentPage === 'index.html' || currentPage === '') {
-        const homeLink = document.getElementById('nav-home');
-        if (homeLink) {
-          homeLink.classList.add('active');
+      // If we're on subscribe page, make sure subscribe link is highlighted
+      if (currentPage === 'subscribe.html') {
+        const subscribeLink = document.getElementById('nav-subscribe');
+        if (subscribeLink) {
+          subscribeLink.classList.add('active');
         }
       }
     });
 
-    // ===== SEARCH =====
-    function doSearch() {
-      const query = document.getElementById('search-input').value.trim();
-      if (query) {
-        alert('खोज परिणाम: "' + query + '" को लागि केही फेला परेन। (Search demo)');
-      } else {
-        alert('कृपया केही खोज्नुहोस्।');
-      }
+    // ===== SUBSCRIPTION FUNCTIONS =====
+    let selectedPlan = null;
+    let selectedAmount = 0;
+
+    function selectPlan(plan, amount) {
+      selectedPlan = plan;
+      selectedAmount = amount;
+      const section = document.getElementById('payment-section');
+      section.style.display = 'block';
+      document.getElementById('selected-plan-info').textContent =
+        plan === 'monthly'
+          ? '📰 मासिक योजना — रू. 500/महिना'
+          : '🏆 वार्षिक योजना — रू. 4,500/वर्ष (रू. 1,500 बचत!)';
+      section.scrollIntoView({ behavior: 'smooth' });
     }
 
-    document.getElementById('search-input').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') doSearch();
-    });
-
-    // ===== NEWSLETTER =====
-    function subscribeNewsletter(e) {
-      e.preventDefault();
-      const msg = document.getElementById('newsletter-msg');
-      msg.style.display = 'block';
-      setTimeout(() => { msg.style.display = 'none'; }, 3000);
-      e.target.reset();
+    function selectPayment(method) {
+      ['esewa-form', 'khalti-form', 'bank-form', 'card-form'].forEach(id => {
+        document.getElementById(id).style.display = 'none';
+      });
+      document.querySelectorAll('.pay-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(method + '-form').style.display = 'block';
+      event.currentTarget.classList.add('active');
     }
 
-    // ===== GOOGLE TRANSLATE =====
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'ne',
-        includedLanguages: 'en,ne',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
+    function processPayment(method) {
+      const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      user.isPremium = true;
+      user.plan = selectedPlan;
+      user.paymentMethod = method;
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      document.getElementById('success-overlay').classList.add('show');
     }
 
-    function loadGoogleTranslate() {
-      var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      document.body.appendChild(script);
+    // Card number formatting
+    const cardInput = document.getElementById('card-num');
+    if (cardInput) {
+      cardInput.addEventListener('input', function() {
+        let v = this.value.replace(/\D/g, '').substring(0, 16);
+        this.value = v.replace(/(.{4})/g, '$1 ').trim();
+      });
     }
 
-    function translatePageToEnglish() {
-      document.cookie = "googtrans=/ne/en; path=/";
-      location.reload();
-    }
-
-    function translatePageToNepali() {
-      document.cookie = "googtrans=/en/ne; path=/";
-      location.reload();
-    }
-
+    // ===== LANGUAGE SWITCH FUNCTION =====
     function setLang(lang) {
-      if (lang === 'en') {
-        translatePageToEnglish();
-      } else {
-        translatePageToNepali();
-      }
+      console.log('Language switched to:', lang);
+      alert('Language switched to: ' + (lang === 'ne' ? 'नेपाली' : 'English'));
     }
-
-    // ===== ON PAGE LOAD =====
-    window.onload = function() {
-      var cookies = document.cookie.split(';');
-      var lang = 'ne';
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        if (cookie.startsWith('googtrans=')) {
-          if (cookie.includes('/en')) {
-            lang = 'en';
-          }
-        }
-      }
-      
-      if (lang === 'en') {
-        loadGoogleTranslate();
-        document.getElementById('lang-en').style.fontWeight = 'bold';
-        document.getElementById('lang-en').style.color = '#2563eb';
-        document.getElementById('lang-ne').style.fontWeight = 'normal';
-        document.getElementById('lang-ne').style.color = '#94a3b8';
-      } else {
-        document.getElementById('lang-ne').style.fontWeight = 'bold';
-        document.getElementById('lang-ne').style.color = '#2563eb';
-        document.getElementById('lang-en').style.fontWeight = 'normal';
-        document.getElementById('lang-en').style.color = '#94a3b8';
-      }
-    };
   </script>
 </body>
 </html>
